@@ -198,6 +198,7 @@
     <ClCompile Include="src\pyWrappers\pyRBActorWrapper.cpp" />
     <ClCompile Include="src\pyWrappers\pyServerWrapper.cpp" />
     <ClCompile Include="src\pyWrappers\pyVector.cpp" />
+    <ClCompile Include="src\pyWrappers\pyVehicleWrapper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

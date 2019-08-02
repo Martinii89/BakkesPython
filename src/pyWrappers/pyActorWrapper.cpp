@@ -9,10 +9,10 @@ void init_actorwrapper(py::module& m) {
 		.def("SetVelocity", &ActorWrapper::SetVelocity)
 		.def("AddVelocity", &ActorWrapper::AddVelocity)
 		//.def("GetRotation", &ActorWrapper::GetRotation) TODO: Wrap Rotator 
-		.def("SetRotation", &ActorWrapper::SetRotation)
+		//.def("SetRotation", &ActorWrapper::SetRotation)
 		.def("Stop", &ActorWrapper::Stop)
 		.def("GetAngularVelocity", &ActorWrapper::GetAngularVelocity)
-		.def("SetAngularVelocity", &ActorWrapper::GetAngularVelocity)
+		.def("SetAngularVelocity", &ActorWrapper::SetAngularVelocity)
 		.def("IsNull", &ActorWrapper::IsNull)
 		;
 }

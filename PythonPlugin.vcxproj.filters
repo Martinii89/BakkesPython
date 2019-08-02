@@ -16,6 +16,15 @@
     <Filter Include="pyWrappers">
       <UniqueIdentifier>{331dd77e-768d-47eb-a9cc-aa0874fd491c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="pyWrappers\Engine">
+      <UniqueIdentifier>{826dbfd8-1ee5-4a3b-9bbc-e826cf435e35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pyWrappers\GameEvent">
+      <UniqueIdentifier>{0a1c681e-bb6d-4d87-8a07-b569e03cf3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pyWrappers\GameObjects">
+      <UniqueIdentifier>{db138179-2795-4e99-abf7-a2dc72dd7c36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pch.h">
@@ -38,15 +47,6 @@
     <ClCompile Include="src\pyWrappers\pyGameWrapper.cpp">
       <Filter>pyWrappers</Filter>
     </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyServerWrapper.cpp">
-      <Filter>pyWrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyCarWrapper.cpp">
-      <Filter>pyWrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyBallWrapper.cpp">
-      <Filter>pyWrappers</Filter>
-    </ClCompile>
     <ClCompile Include="src\pyWrappers\pyVector.cpp">
       <Filter>pyWrappers</Filter>
     </ClCompile>
@@ -54,10 +54,22 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\pyWrappers\pyActorWrapper.cpp">
-      <Filter>pyWrappers</Filter>
+      <Filter>pyWrappers\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pyWrappers\pyServerWrapper.cpp">
+      <Filter>pyWrappers\GameEvent</Filter>
     </ClCompile>
     <ClCompile Include="src\pyWrappers\pyRBActorWrapper.cpp">
-      <Filter>pyWrappers</Filter>
+      <Filter>pyWrappers\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pyWrappers\pyBallWrapper.cpp">
+      <Filter>pyWrappers\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pyWrappers\pyCarWrapper.cpp">
+      <Filter>pyWrappers\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pyWrappers\pyVehicleWrapper.cpp">
+      <Filter>pyWrappers\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
