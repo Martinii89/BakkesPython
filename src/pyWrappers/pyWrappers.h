@@ -16,7 +16,7 @@ void init_gamewrapper(py::module&);
 
 void init_cvarmanager(py::module&);
 
-PYBIND11_EMBEDDED_MODULE(pyBakkes, m) {
+PYBIND11_EMBEDDED_MODULE(pybakkes, m) {
 	init_vector(m);
 
 	init_actorwrapper(m);

@@ -25,6 +25,12 @@
     <Filter Include="pyWrappers\GameObjects">
       <UniqueIdentifier>{db138179-2795-4e99-abf7-a2dc72dd7c36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BakkeBindings">
+      <UniqueIdentifier>{5d15e586-890f-4c38-bbbf-10377459d9c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BakkeBindings\bindingcode">
+      <UniqueIdentifier>{7b38f5b0-4a3a-4427-bf02-5110be6eeee5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pch.h">
@@ -36,40 +42,106 @@
     <ClInclude Include="src\pyWrappers\pyWrappers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\bakke_bindings\pybakke.h">
+      <Filter>BakkeBindings</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyCvarWrapper.cpp">
-      <Filter>pyWrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyGameWrapper.cpp">
-      <Filter>pyWrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyVector.cpp">
-      <Filter>pyWrappers</Filter>
-    </ClCompile>
     <ClCompile Include="src\PythonPlugin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyActorWrapper.cpp">
-      <Filter>pyWrappers\Engine</Filter>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\arraywrapper.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
     </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyServerWrapper.cpp">
-      <Filter>pyWrappers\GameEvent</Filter>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameEvent\GameEditorWrapper.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
     </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyRBActorWrapper.cpp">
-      <Filter>pyWrappers\Engine</Filter>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameEvent\ReplayDirectorWrapper.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
     </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyBallWrapper.cpp">
-      <Filter>pyWrappers\GameObjects</Filter>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameEvent\TutorialWrapper.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
     </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyCarWrapper.cpp">
-      <Filter>pyWrappers\GameObjects</Filter>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\BaseCameraWrapper.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
     </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyVehicleWrapper.cpp">
-      <Filter>pyWrappers\GameObjects</Filter>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\CameraWrapper.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\CarComponent\DodgeComponentWrapper.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\CarComponent\PrimitiveComponentWrapper.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\CarComponent\VehicleSimWrapper.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\PerformanceStats\PerfStatGraphWrapper.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\PerformanceStats\StatGraphSystemWrapper.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\RumbleComponent\BallLassoPickup.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\RumbleComponent\GravityPickup.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\RumbleComponent\VelcroPickup.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_1.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_10.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_11.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_12.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_13.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_14.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_15.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_2.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_3.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_4.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_5.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_6.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_7.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_8.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_9.cpp">
+      <Filter>BakkeBindings\bindingcode</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
