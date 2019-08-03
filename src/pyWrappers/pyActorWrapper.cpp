@@ -2,17 +2,182 @@
 #include "bakkesmod/wrappers/Engine/ActorWrapper.h"
 
 void init_actorwrapper(py::module& m) {
-	py::class_<ActorWrapper, std::shared_ptr<ActorWrapper>>(m, "ActorWrapper")
-		.def("GetLocation", &ActorWrapper::GetLocation)
-		.def("SetLocation", &ActorWrapper::SetLocation)
-		.def("GetVelocity", &ActorWrapper::GetVelocity)
-		.def("SetVelocity", &ActorWrapper::SetVelocity)
-		.def("AddVelocity", &ActorWrapper::AddVelocity)
-		//.def("GetRotation", &ActorWrapper::GetRotation) TODO: Wrap Rotator 
-		//.def("SetRotation", &ActorWrapper::SetRotation)
-		.def("Stop", &ActorWrapper::Stop)
-		.def("GetAngularVelocity", &ActorWrapper::GetAngularVelocity)
-		.def("SetAngularVelocity", &ActorWrapper::SetAngularVelocity)
-		.def("IsNull", &ActorWrapper::IsNull)
-		;
+	{ // ObjectWrapper file: line:9
+		pybind11::class_<ObjectWrapper, std::shared_ptr<ObjectWrapper>> cl(m, "ObjectWrapper");
+		pybind11::handle cl_type = cl;
+
+		cl.def(pybind11::init<unsigned long>(), pybind11::arg("mem"));
+
+		//cl.def_readwrite("memory_address", &ObjectWrapper::memory_address);
+	}
+	pybind11::class_<ActorWrapper, std::shared_ptr<ActorWrapper>, ObjectWrapper> cl(m, "ActorWrapper");
+	pybind11::handle cl_type = cl;
+
+	cl.def(pybind11::init<unsigned long>(), pybind11::arg("mem"));
+
+	cl.def(pybind11::init([](ActorWrapper const& o) { return new ActorWrapper(o); }));
+	cl.def("assign", &ActorWrapper::operator=, "C++: ActorWrapper::operator=(class ActorWrapper) --> class ActorWrapper &", pybind11::return_value_policy::automatic, pybind11::arg("rhs"));
+	cl.def("GetLocation", &ActorWrapper::GetLocation, "C++: ActorWrapper::GetLocation() --> struct Vector");
+	cl.def("SetLocation", &ActorWrapper::SetLocation, "C++: ActorWrapper::SetLocation(const struct Vector) --> void", pybind11::arg("location"));
+	cl.def("GetVelocity", &ActorWrapper::GetVelocity, "C++: ActorWrapper::GetVelocity() --> struct Vector");
+	cl.def("SetVelocity", &ActorWrapper::SetVelocity, "C++: ActorWrapper::SetVelocity(const struct Vector) --> void", pybind11::arg("velocity"));
+	cl.def("AddVelocity", &ActorWrapper::AddVelocity, "C++: ActorWrapper::AddVelocity(const struct Vector) --> void", pybind11::arg("velocity"));
+	cl.def("GetRotation", &ActorWrapper::GetRotation, "C++: ActorWrapper::GetRotation() --> struct Rotator");
+	cl.def("SetRotation", &ActorWrapper::SetRotation, "C++: ActorWrapper::SetRotation(const struct Rotator) --> void", pybind11::arg("rotation"));
+	cl.def("SetTorque", &ActorWrapper::SetTorque, "C++: ActorWrapper::SetTorque(const struct Vector) --> void", pybind11::arg("torq"));
+	cl.def("Stop", &ActorWrapper::Stop, "C++: ActorWrapper::Stop() --> void");
+	cl.def("GetAngularVelocity", &ActorWrapper::GetAngularVelocity, "C++: ActorWrapper::GetAngularVelocity() --> struct Vector");
+	cl.def("SetAngularVelocity", &ActorWrapper::SetAngularVelocity, "C++: ActorWrapper::SetAngularVelocity(const struct Vector, bool) --> void", pybind11::arg("v"), pybind11::arg("addToCurrent"));
+	cl.def("IsNull", &ActorWrapper::IsNull, "C++: ActorWrapper::IsNull() --> bool");
+	cl.def("GetDrawScale", &ActorWrapper::GetDrawScale, "C++: ActorWrapper::GetDrawScale() --> float");
+	cl.def("SetDrawScale", &ActorWrapper::SetDrawScale, "C++: ActorWrapper::SetDrawScale(float) --> void", pybind11::arg("newDrawScale"));
+	cl.def("GetDrawScale3D", &ActorWrapper::GetDrawScale3D, "C++: ActorWrapper::GetDrawScale3D() --> struct Vector");
+	cl.def("SetDrawScale3D", &ActorWrapper::SetDrawScale3D, "C++: ActorWrapper::SetDrawScale3D(struct Vector) --> void", pybind11::arg("newDrawScale3D"));
+	cl.def("GetPrePivot", &ActorWrapper::GetPrePivot, "C++: ActorWrapper::GetPrePivot() --> struct Vector");
+	cl.def("SetPrePivot", &ActorWrapper::SetPrePivot, "C++: ActorWrapper::SetPrePivot(struct Vector) --> void", pybind11::arg("newPrePivot"));
+	cl.def("GetEditorIconColor", &ActorWrapper::GetEditorIconColor, "C++: ActorWrapper::GetEditorIconColor() --> struct UnrealColor");
+	cl.def("SetEditorIconColor", &ActorWrapper::SetEditorIconColor, "C++: ActorWrapper::SetEditorIconColor(struct UnrealColor) --> void", pybind11::arg("newEditorIconColor"));
+	cl.def("GetCustomTimeDilation", &ActorWrapper::GetCustomTimeDilation, "C++: ActorWrapper::GetCustomTimeDilation() --> float");
+	cl.def("SetCustomTimeDilation", &ActorWrapper::SetCustomTimeDilation, "C++: ActorWrapper::SetCustomTimeDilation(float) --> void", pybind11::arg("newCustomTimeDilation"));
+	cl.def("GetPhysics", &ActorWrapper::GetPhysics, "C++: ActorWrapper::GetPhysics() --> unsigned char");
+	cl.def("SetPhysics", &ActorWrapper::SetPhysics, "C++: ActorWrapper::SetPhysics(unsigned char) --> void", pybind11::arg("newPhysics"));
+	cl.def("GetRemoteRole", &ActorWrapper::GetRemoteRole, "C++: ActorWrapper::GetRemoteRole() --> unsigned char");
+	cl.def("SetRemoteRole", &ActorWrapper::SetRemoteRole, "C++: ActorWrapper::SetRemoteRole(unsigned char) --> void", pybind11::arg("newRemoteRole"));
+	cl.def("GetRole", &ActorWrapper::GetRole, "C++: ActorWrapper::GetRole() --> unsigned char");
+	cl.def("SetRole", &ActorWrapper::SetRole, "C++: ActorWrapper::SetRole(unsigned char) --> void", pybind11::arg("newRole"));
+	cl.def("GetCollisionType", &ActorWrapper::GetCollisionType, "C++: ActorWrapper::GetCollisionType() --> unsigned char");
+	cl.def("SetCollisionType", &ActorWrapper::SetCollisionType, "C++: ActorWrapper::SetCollisionType(unsigned char) --> void", pybind11::arg("newCollisionType"));
+	cl.def("GetReplicatedCollisionType", &ActorWrapper::GetReplicatedCollisionType, "C++: ActorWrapper::GetReplicatedCollisionType() --> unsigned char");
+	cl.def("SetReplicatedCollisionType", &ActorWrapper::SetReplicatedCollisionType, "C++: ActorWrapper::SetReplicatedCollisionType(unsigned char) --> void", pybind11::arg("newReplicatedCollisionType"));
+	cl.def("GetOwner", &ActorWrapper::GetOwner, "C++: ActorWrapper::GetOwner() --> class ActorWrapper");
+	cl.def("GetBase", &ActorWrapper::GetBase, "C++: ActorWrapper::GetBase() --> class ActorWrapper");
+	cl.def("GetbStatic", &ActorWrapper::GetbStatic, "C++: ActorWrapper::GetbStatic() --> unsigned long");
+	cl.def("GetbHidden", &ActorWrapper::GetbHidden, "C++: ActorWrapper::GetbHidden() --> unsigned long");
+	cl.def("GetbHiddenSelf", &ActorWrapper::GetbHiddenSelf, "C++: ActorWrapper::GetbHiddenSelf() --> unsigned long");
+	cl.def("SetbHiddenSelf", &ActorWrapper::SetbHiddenSelf, "C++: ActorWrapper::SetbHiddenSelf(unsigned long) --> void", pybind11::arg("newbHiddenSelf"));
+	cl.def("GetbNoDelete", &ActorWrapper::GetbNoDelete, "C++: ActorWrapper::GetbNoDelete() --> unsigned long");
+	cl.def("SetbNoDelete", &ActorWrapper::SetbNoDelete, "C++: ActorWrapper::SetbNoDelete(unsigned long) --> void", pybind11::arg("newbNoDelete"));
+	cl.def("GetbDeleteMe", &ActorWrapper::GetbDeleteMe, "C++: ActorWrapper::GetbDeleteMe() --> unsigned long");
+	cl.def("SetbDeleteMe", &ActorWrapper::SetbDeleteMe, "C++: ActorWrapper::SetbDeleteMe(unsigned long) --> void", pybind11::arg("newbDeleteMe"));
+	cl.def("GetbTicked", &ActorWrapper::GetbTicked, "C++: ActorWrapper::GetbTicked() --> unsigned long");
+	cl.def("SetbTicked", &ActorWrapper::SetbTicked, "C++: ActorWrapper::SetbTicked(unsigned long) --> void", pybind11::arg("newbTicked"));
+	cl.def("GetbOnlyOwnerSee", &ActorWrapper::GetbOnlyOwnerSee, "C++: ActorWrapper::GetbOnlyOwnerSee() --> unsigned long");
+	cl.def("SetbOnlyOwnerSee", &ActorWrapper::SetbOnlyOwnerSee, "C++: ActorWrapper::SetbOnlyOwnerSee(unsigned long) --> void", pybind11::arg("newbOnlyOwnerSee"));
+	cl.def("GetbTickIsDisabled", &ActorWrapper::GetbTickIsDisabled, "C++: ActorWrapper::GetbTickIsDisabled() --> unsigned long");
+	cl.def("SetbTickIsDisabled", &ActorWrapper::SetbTickIsDisabled, "C++: ActorWrapper::SetbTickIsDisabled(unsigned long) --> void", pybind11::arg("newbTickIsDisabled"));
+	cl.def("GetbWorldGeometry", &ActorWrapper::GetbWorldGeometry, "C++: ActorWrapper::GetbWorldGeometry() --> unsigned long");
+	cl.def("SetbWorldGeometry", &ActorWrapper::SetbWorldGeometry, "C++: ActorWrapper::SetbWorldGeometry(unsigned long) --> void", pybind11::arg("newbWorldGeometry"));
+	cl.def("GetbIgnoreRigidBodyPawns", &ActorWrapper::GetbIgnoreRigidBodyPawns, "C++: ActorWrapper::GetbIgnoreRigidBodyPawns() --> unsigned long");
+	cl.def("SetbIgnoreRigidBodyPawns", &ActorWrapper::SetbIgnoreRigidBodyPawns, "C++: ActorWrapper::SetbIgnoreRigidBodyPawns(unsigned long) --> void", pybind11::arg("newbIgnoreRigidBodyPawns"));
+	cl.def("GetbOrientOnSlope", &ActorWrapper::GetbOrientOnSlope, "C++: ActorWrapper::GetbOrientOnSlope() --> unsigned long");
+	cl.def("SetbOrientOnSlope", &ActorWrapper::SetbOrientOnSlope, "C++: ActorWrapper::SetbOrientOnSlope(unsigned long) --> void", pybind11::arg("newbOrientOnSlope"));
+	cl.def("GetbIsMoving", &ActorWrapper::GetbIsMoving, "C++: ActorWrapper::GetbIsMoving() --> unsigned long");
+	cl.def("GetbAlwaysEncroachCheck", &ActorWrapper::GetbAlwaysEncroachCheck, "C++: ActorWrapper::GetbAlwaysEncroachCheck() --> unsigned long");
+	cl.def("SetbAlwaysEncroachCheck", &ActorWrapper::SetbAlwaysEncroachCheck, "C++: ActorWrapper::SetbAlwaysEncroachCheck(unsigned long) --> void", pybind11::arg("newbAlwaysEncroachCheck"));
+	cl.def("GetbHasAlternateTargetLocation", &ActorWrapper::GetbHasAlternateTargetLocation, "C++: ActorWrapper::GetbHasAlternateTargetLocation() --> unsigned long");
+	cl.def("GetbAlwaysRelevant", &ActorWrapper::GetbAlwaysRelevant, "C++: ActorWrapper::GetbAlwaysRelevant() --> unsigned long");
+	cl.def("GetbReplicateInstigator", &ActorWrapper::GetbReplicateInstigator, "C++: ActorWrapper::GetbReplicateInstigator() --> unsigned long");
+	cl.def("GetbReplicateMovement", &ActorWrapper::GetbReplicateMovement, "C++: ActorWrapper::GetbReplicateMovement() --> unsigned long");
+	cl.def("GetbUpdateSimulatedPosition", &ActorWrapper::GetbUpdateSimulatedPosition, "C++: ActorWrapper::GetbUpdateSimulatedPosition() --> unsigned long");
+	cl.def("SetbUpdateSimulatedPosition", &ActorWrapper::SetbUpdateSimulatedPosition, "C++: ActorWrapper::SetbUpdateSimulatedPosition(unsigned long) --> void", pybind11::arg("newbUpdateSimulatedPosition"));
+	cl.def("GetbDemoRecording", &ActorWrapper::GetbDemoRecording, "C++: ActorWrapper::GetbDemoRecording() --> unsigned long");
+	cl.def("SetbDemoRecording", &ActorWrapper::SetbDemoRecording, "C++: ActorWrapper::SetbDemoRecording(unsigned long) --> void", pybind11::arg("newbDemoRecording"));
+	cl.def("GetbDemoOwner", &ActorWrapper::GetbDemoOwner, "C++: ActorWrapper::GetbDemoOwner() --> unsigned long");
+	cl.def("SetbDemoOwner", &ActorWrapper::SetbDemoOwner, "C++: ActorWrapper::SetbDemoOwner(unsigned long) --> void", pybind11::arg("newbDemoOwner"));
+	cl.def("GetbForceDemoRelevant", &ActorWrapper::GetbForceDemoRelevant, "C++: ActorWrapper::GetbForceDemoRelevant() --> unsigned long");
+	cl.def("SetbForceDemoRelevant", &ActorWrapper::SetbForceDemoRelevant, "C++: ActorWrapper::SetbForceDemoRelevant(unsigned long) --> void", pybind11::arg("newbForceDemoRelevant"));
+	cl.def("GetbNetInitialRotation", &ActorWrapper::GetbNetInitialRotation, "C++: ActorWrapper::GetbNetInitialRotation() --> unsigned long");
+	cl.def("SetbNetInitialRotation", &ActorWrapper::SetbNetInitialRotation, "C++: ActorWrapper::SetbNetInitialRotation(unsigned long) --> void", pybind11::arg("newbNetInitialRotation"));
+	cl.def("GetbReplicateRigidBodyLocation", &ActorWrapper::GetbReplicateRigidBodyLocation, "C++: ActorWrapper::GetbReplicateRigidBodyLocation() --> unsigned long");
+	cl.def("SetbReplicateRigidBodyLocation", &ActorWrapper::SetbReplicateRigidBodyLocation, "C++: ActorWrapper::SetbReplicateRigidBodyLocation(unsigned long) --> void", pybind11::arg("newbReplicateRigidBodyLocation"));
+	cl.def("GetbKillDuringLevelTransition", &ActorWrapper::GetbKillDuringLevelTransition, "C++: ActorWrapper::GetbKillDuringLevelTransition() --> unsigned long");
+	cl.def("SetbKillDuringLevelTransition", &ActorWrapper::SetbKillDuringLevelTransition, "C++: ActorWrapper::SetbKillDuringLevelTransition(unsigned long) --> void", pybind11::arg("newbKillDuringLevelTransition"));
+	cl.def("GetbPostRenderIfNotVisible", &ActorWrapper::GetbPostRenderIfNotVisible, "C++: ActorWrapper::GetbPostRenderIfNotVisible() --> unsigned long");
+	cl.def("SetbPostRenderIfNotVisible", &ActorWrapper::SetbPostRenderIfNotVisible, "C++: ActorWrapper::SetbPostRenderIfNotVisible(unsigned long) --> void", pybind11::arg("newbPostRenderIfNotVisible"));
+	cl.def("GetbForceNetUpdate", &ActorWrapper::GetbForceNetUpdate, "C++: ActorWrapper::GetbForceNetUpdate() --> unsigned long");
+	cl.def("SetbForceNetUpdate", &ActorWrapper::SetbForceNetUpdate, "C++: ActorWrapper::SetbForceNetUpdate(unsigned long) --> void", pybind11::arg("newbForceNetUpdate"));
+	cl.def("GetbForcePacketUpdate", &ActorWrapper::GetbForcePacketUpdate, "C++: ActorWrapper::GetbForcePacketUpdate() --> unsigned long");
+	cl.def("SetbForcePacketUpdate", &ActorWrapper::SetbForcePacketUpdate, "C++: ActorWrapper::SetbForcePacketUpdate(unsigned long) --> void", pybind11::arg("newbForcePacketUpdate"));
+	cl.def("GetbPendingNetUpdate", &ActorWrapper::GetbPendingNetUpdate, "C++: ActorWrapper::GetbPendingNetUpdate() --> unsigned long");
+	cl.def("SetbPendingNetUpdate", &ActorWrapper::SetbPendingNetUpdate, "C++: ActorWrapper::SetbPendingNetUpdate(unsigned long) --> void", pybind11::arg("newbPendingNetUpdate"));
+	cl.def("GetbGameRelevant", &ActorWrapper::GetbGameRelevant, "C++: ActorWrapper::GetbGameRelevant() --> unsigned long");
+	cl.def("SetbGameRelevant", &ActorWrapper::SetbGameRelevant, "C++: ActorWrapper::SetbGameRelevant(unsigned long) --> void", pybind11::arg("newbGameRelevant"));
+	cl.def("GetbMovable", &ActorWrapper::GetbMovable, "C++: ActorWrapper::GetbMovable() --> unsigned long");
+	cl.def("SetbMovable", &ActorWrapper::SetbMovable, "C++: ActorWrapper::SetbMovable(unsigned long) --> void", pybind11::arg("newbMovable"));
+	cl.def("GetbCanTeleport", &ActorWrapper::GetbCanTeleport, "C++: ActorWrapper::GetbCanTeleport() --> unsigned long");
+	cl.def("SetbCanTeleport", &ActorWrapper::SetbCanTeleport, "C++: ActorWrapper::SetbCanTeleport(unsigned long) --> void", pybind11::arg("newbCanTeleport"));
+	cl.def("GetbAlwaysTick", &ActorWrapper::GetbAlwaysTick, "C++: ActorWrapper::GetbAlwaysTick() --> unsigned long");
+	cl.def("SetbAlwaysTick", &ActorWrapper::SetbAlwaysTick, "C++: ActorWrapper::SetbAlwaysTick(unsigned long) --> void", pybind11::arg("newbAlwaysTick"));
+	cl.def("GetbBlocksNavigation", &ActorWrapper::GetbBlocksNavigation, "C++: ActorWrapper::GetbBlocksNavigation() --> unsigned long");
+	cl.def("SetbBlocksNavigation", &ActorWrapper::SetbBlocksNavigation, "C++: ActorWrapper::SetbBlocksNavigation(unsigned long) --> void", pybind11::arg("newbBlocksNavigation"));
+	cl.def("GetBlockRigidBody", &ActorWrapper::GetBlockRigidBody, "C++: ActorWrapper::GetBlockRigidBody() --> unsigned long");
+	cl.def("SetBlockRigidBody", &ActorWrapper::SetBlockRigidBody, "C++: ActorWrapper::SetBlockRigidBody(unsigned long) --> void", pybind11::arg("newBlockRigidBody"));
+	cl.def("GetbCollideWhenPlacing", &ActorWrapper::GetbCollideWhenPlacing, "C++: ActorWrapper::GetbCollideWhenPlacing() --> unsigned long");
+	cl.def("SetbCollideWhenPlacing", &ActorWrapper::SetbCollideWhenPlacing, "C++: ActorWrapper::SetbCollideWhenPlacing(unsigned long) --> void", pybind11::arg("newbCollideWhenPlacing"));
+	cl.def("GetbCollideActors", &ActorWrapper::GetbCollideActors, "C++: ActorWrapper::GetbCollideActors() --> unsigned long");
+	cl.def("SetbCollideActors", &ActorWrapper::SetbCollideActors, "C++: ActorWrapper::SetbCollideActors(unsigned long) --> void", pybind11::arg("newbCollideActors"));
+	cl.def("GetbCollideWorld", &ActorWrapper::GetbCollideWorld, "C++: ActorWrapper::GetbCollideWorld() --> unsigned long");
+	cl.def("SetbCollideWorld", &ActorWrapper::SetbCollideWorld, "C++: ActorWrapper::SetbCollideWorld(unsigned long) --> void", pybind11::arg("newbCollideWorld"));
+	cl.def("GetbCollideComplex", &ActorWrapper::GetbCollideComplex, "C++: ActorWrapper::GetbCollideComplex() --> unsigned long");
+	cl.def("SetbCollideComplex", &ActorWrapper::SetbCollideComplex, "C++: ActorWrapper::SetbCollideComplex(unsigned long) --> void", pybind11::arg("newbCollideComplex"));
+	cl.def("GetbBlockActors", &ActorWrapper::GetbBlockActors, "C++: ActorWrapper::GetbBlockActors() --> unsigned long");
+	cl.def("SetbBlockActors", &ActorWrapper::SetbBlockActors, "C++: ActorWrapper::SetbBlockActors(unsigned long) --> void", pybind11::arg("newbBlockActors"));
+	cl.def("GetbBlocksTeleport", &ActorWrapper::GetbBlocksTeleport, "C++: ActorWrapper::GetbBlocksTeleport() --> unsigned long");
+	cl.def("SetbBlocksTeleport", &ActorWrapper::SetbBlocksTeleport, "C++: ActorWrapper::SetbBlocksTeleport(unsigned long) --> void", pybind11::arg("newbBlocksTeleport"));
+	cl.def("GetbPhysRigidBodyOutOfWorldCheck", &ActorWrapper::GetbPhysRigidBodyOutOfWorldCheck, "C++: ActorWrapper::GetbPhysRigidBodyOutOfWorldCheck() --> unsigned long");
+	cl.def("SetbPhysRigidBodyOutOfWorldCheck", &ActorWrapper::SetbPhysRigidBodyOutOfWorldCheck, "C++: ActorWrapper::SetbPhysRigidBodyOutOfWorldCheck(unsigned long) --> void", pybind11::arg("newbPhysRigidBodyOutOfWorldCheck"));
+	cl.def("GetbComponentOutsideWorld", &ActorWrapper::GetbComponentOutsideWorld, "C++: ActorWrapper::GetbComponentOutsideWorld() --> unsigned long");
+	cl.def("GetbRigidBodyWasAwake", &ActorWrapper::GetbRigidBodyWasAwake, "C++: ActorWrapper::GetbRigidBodyWasAwake() --> unsigned long");
+	cl.def("SetbRigidBodyWasAwake", &ActorWrapper::SetbRigidBodyWasAwake, "C++: ActorWrapper::SetbRigidBodyWasAwake(unsigned long) --> void", pybind11::arg("newbRigidBodyWasAwake"));
+	cl.def("GetbCallRigidBodyWakeEvents", &ActorWrapper::GetbCallRigidBodyWakeEvents, "C++: ActorWrapper::GetbCallRigidBodyWakeEvents() --> unsigned long");
+	cl.def("SetbCallRigidBodyWakeEvents", &ActorWrapper::SetbCallRigidBodyWakeEvents, "C++: ActorWrapper::SetbCallRigidBodyWakeEvents(unsigned long) --> void", pybind11::arg("newbCallRigidBodyWakeEvents"));
+	cl.def("GetbBounce", &ActorWrapper::GetbBounce, "C++: ActorWrapper::GetbBounce() --> unsigned long");
+	cl.def("SetbBounce", &ActorWrapper::SetbBounce, "C++: ActorWrapper::SetbBounce(unsigned long) --> void", pybind11::arg("newbBounce"));
+	cl.def("GetbEditable", &ActorWrapper::GetbEditable, "C++: ActorWrapper::GetbEditable() --> unsigned long");
+	cl.def("SetbEditable", &ActorWrapper::SetbEditable, "C++: ActorWrapper::SetbEditable(unsigned long) --> void", pybind11::arg("newbEditable"));
+	cl.def("GetbLockLocation", &ActorWrapper::GetbLockLocation, "C++: ActorWrapper::GetbLockLocation() --> unsigned long");
+	cl.def("SetbLockLocation", &ActorWrapper::SetbLockLocation, "C++: ActorWrapper::SetbLockLocation(unsigned long) --> void", pybind11::arg("newbLockLocation"));
+	cl.def("GetNetUpdateTime", &ActorWrapper::GetNetUpdateTime, "C++: ActorWrapper::GetNetUpdateTime() --> float");
+	cl.def("SetNetUpdateTime", &ActorWrapper::SetNetUpdateTime, "C++: ActorWrapper::SetNetUpdateTime(float) --> void", pybind11::arg("newNetUpdateTime"));
+	cl.def("GetNetUpdateFrequency", &ActorWrapper::GetNetUpdateFrequency, "C++: ActorWrapper::GetNetUpdateFrequency() --> float");
+	cl.def("SetNetUpdateFrequency", &ActorWrapper::SetNetUpdateFrequency, "C++: ActorWrapper::SetNetUpdateFrequency(float) --> void", pybind11::arg("newNetUpdateFrequency"));
+	cl.def("GetNetPriority", &ActorWrapper::GetNetPriority, "C++: ActorWrapper::GetNetPriority() --> float");
+	cl.def("SetNetPriority", &ActorWrapper::SetNetPriority, "C++: ActorWrapper::SetNetPriority(float) --> void", pybind11::arg("newNetPriority"));
+	cl.def("GetLastNetUpdateTime", &ActorWrapper::GetLastNetUpdateTime, "C++: ActorWrapper::GetLastNetUpdateTime() --> float");
+	cl.def("GetLastForcePacketUpdateTime", &ActorWrapper::GetLastForcePacketUpdateTime, "C++: ActorWrapper::GetLastForcePacketUpdateTime() --> float");
+	cl.def("SetLastForcePacketUpdateTime", &ActorWrapper::SetLastForcePacketUpdateTime, "C++: ActorWrapper::SetLastForcePacketUpdateTime(float) --> void", pybind11::arg("newLastForcePacketUpdateTime"));
+	cl.def("GetTimeSinceLastTick", &ActorWrapper::GetTimeSinceLastTick, "C++: ActorWrapper::GetTimeSinceLastTick() --> float");
+	cl.def("GetLifeSpan", &ActorWrapper::GetLifeSpan, "C++: ActorWrapper::GetLifeSpan() --> float");
+	cl.def("GetCreationTime", &ActorWrapper::GetCreationTime, "C++: ActorWrapper::GetCreationTime() --> float");
+	cl.def("GetLastRenderTime", &ActorWrapper::GetLastRenderTime, "C++: ActorWrapper::GetLastRenderTime() --> float");
+	cl.def("GetHiddenEditorViews", &ActorWrapper::GetHiddenEditorViews, "C++: ActorWrapper::GetHiddenEditorViews() --> unsigned long long");
+	cl.def("SetHiddenEditorViews", &ActorWrapper::SetHiddenEditorViews, "C++: ActorWrapper::SetHiddenEditorViews(unsigned long long) --> void", pybind11::arg("newHiddenEditorViews"));
+	cl.def("GetCollisionComponent", &ActorWrapper::GetCollisionComponent, "C++: ActorWrapper::GetCollisionComponent() --> class PrimitiveComponentWrapper");
+	cl.def("ForceNetUpdatePacket", &ActorWrapper::ForceNetUpdatePacket, "C++: ActorWrapper::ForceNetUpdatePacket() --> void");
+	cl.def("ForceNetUpdate2", &ActorWrapper::ForceNetUpdate2, "C++: ActorWrapper::ForceNetUpdate2() --> void");
+	cl.def("WillOverlap", &ActorWrapper::WillOverlap, "C++: ActorWrapper::WillOverlap(struct Vector &, struct Vector &, struct Vector &, struct Vector &, float, float, float *) --> bool", pybind11::arg("PosA"), pybind11::arg("VelA"), pybind11::arg("PosB"), pybind11::arg("VelB"), pybind11::arg("StepSize"), pybind11::arg("Radius"), pybind11::arg("Time"));
+	cl.def("eventReplicationEnded", &ActorWrapper::eventReplicationEnded, "C++: ActorWrapper::eventReplicationEnded() --> void");
+	cl.def("eventPostDemoRewind", &ActorWrapper::eventPostDemoRewind, "C++: ActorWrapper::eventPostDemoRewind() --> void");
+	cl.def("IsInPersistentLevel", &ActorWrapper::IsInPersistentLevel, "C++: ActorWrapper::IsInPersistentLevel(unsigned long) --> bool", pybind11::arg("bIncludeLevelStreamingPersistent"));
+	cl.def("SetHUDLocation", &ActorWrapper::SetHUDLocation, "C++: ActorWrapper::SetHUDLocation(struct Vector &) --> void", pybind11::arg("NewHUDLocation"));
+	cl.def("eventSpawnedByKismet", &ActorWrapper::eventSpawnedByKismet, "C++: ActorWrapper::eventSpawnedByKismet() --> void");
+	cl.def("GetTargetLocation", &ActorWrapper::GetTargetLocation, "C++: ActorWrapper::GetTargetLocation(class ActorWrapper, unsigned long) --> struct Vector", pybind11::arg("RequestedBy"), pybind11::arg("bRequestAlternateLoc"));
+	cl.def("eventScriptGetTeamNum", &ActorWrapper::eventScriptGetTeamNum, "C++: ActorWrapper::eventScriptGetTeamNum() --> unsigned char");
+	cl.def("GetTeamNum2", &ActorWrapper::GetTeamNum2, "C++: ActorWrapper::GetTeamNum2() --> unsigned char");
+	cl.def("IsPlayerOwned", &ActorWrapper::IsPlayerOwned, "C++: ActorWrapper::IsPlayerOwned() --> bool");
+	cl.def("IsStationary", &ActorWrapper::IsStationary, "C++: ActorWrapper::IsStationary() --> bool");
+	cl.def("GetGravityAcceleration", &ActorWrapper::GetGravityAcceleration, "C++: ActorWrapper::GetGravityAcceleration() --> struct Vector");
+	cl.def("GetGravityDirection", &ActorWrapper::GetGravityDirection, "C++: ActorWrapper::GetGravityDirection() --> struct Vector");
+	cl.def("GetGravityZ", &ActorWrapper::GetGravityZ, "C++: ActorWrapper::GetGravityZ() --> float");
+	cl.def("IsOverlapping", &ActorWrapper::IsOverlapping, "C++: ActorWrapper::IsOverlapping(class ActorWrapper) --> bool", pybind11::arg("A"));
+	cl.def("ContainsPoint", &ActorWrapper::ContainsPoint, "C++: ActorWrapper::ContainsPoint(struct Vector &) --> bool", pybind11::arg("Spot"));
+	cl.def("eventFellOutOfWorld", &ActorWrapper::eventFellOutOfWorld, "C++: ActorWrapper::eventFellOutOfWorld() --> void");
+	cl.def("SetTickIsDisabled", &ActorWrapper::SetTickIsDisabled, "C++: ActorWrapper::SetTickIsDisabled(unsigned long) --> void", pybind11::arg("bInDisabled"));
+	cl.def("SetPhysics2", &ActorWrapper::SetPhysics2, "C++: ActorWrapper::SetPhysics2(unsigned char) --> void", pybind11::arg("newPhysics"));
+	cl.def("SetHidden2", &ActorWrapper::SetHidden2, "C++: ActorWrapper::SetHidden2(unsigned long) --> void", pybind11::arg("bNewHidden"));
+	cl.def("DrawDebugCone", &ActorWrapper::DrawDebugCone, "C++: ActorWrapper::DrawDebugCone(struct Vector &, struct Vector &, float, float, float, int, struct UnrealColor &, unsigned long) --> void", pybind11::arg("Origin"), pybind11::arg("Direction"), pybind11::arg("Length"), pybind11::arg("AngleWidth"), pybind11::arg("AngleHeight"), pybind11::arg("NumSides"), pybind11::arg("DrawColor"), pybind11::arg("bPersistentLines"));
+	cl.def("GetAggregateBaseVelocity", &ActorWrapper::GetAggregateBaseVelocity, "C++: ActorWrapper::GetAggregateBaseVelocity(class ActorWrapper) --> struct Vector", pybind11::arg("TestBase"));
+	cl.def("IsOwnedBy", &ActorWrapper::IsOwnedBy, "C++: ActorWrapper::IsOwnedBy(class ActorWrapper) --> bool", pybind11::arg("TestActor"));
+	cl.def("IsBasedOn", &ActorWrapper::IsBasedOn, "C++: ActorWrapper::IsBasedOn(class ActorWrapper) --> bool", pybind11::arg("TestActor"));
+	cl.def("GetTerminalVelocity", &ActorWrapper::GetTerminalVelocity, "C++: ActorWrapper::GetTerminalVelocity() --> float");
 }

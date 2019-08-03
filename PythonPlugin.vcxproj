@@ -143,6 +143,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>src;pybind11\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -178,27 +179,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\bakke_bindings\pybakke.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\PythonPlugin.h" />
     <ClInclude Include="src\pyWrappers\pyWrappers.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\arraywrapper.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameEvent\GameEditorWrapper.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameEvent\ReplayDirectorWrapper.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameEvent\TutorialWrapper.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\BaseCameraWrapper.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\CameraWrapper.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\CarComponent\DodgeComponentWrapper.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\CarComponent\PrimitiveComponentWrapper.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\CarComponent\VehicleSimWrapper.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\PerformanceStats\PerfStatGraphWrapper.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\PerformanceStats\StatGraphSystemWrapper.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\RumbleComponent\BallLassoPickup.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\RumbleComponent\GravityPickup.cpp" />
+    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\RumbleComponent\VelcroPickup.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_1.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_10.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_11.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_12.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_13.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_14.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_15.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_2.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_3.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_4.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_5.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_6.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_7.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_8.cpp" />
+    <ClCompile Include="src\bakke_bindings\unknown\unknown_9.cpp" />
     <ClCompile Include="src\PythonPlugin.cpp" />
-    <ClCompile Include="src\pyWrappers\pyActorWrapper.cpp" />
-    <ClCompile Include="src\pyWrappers\pyBallWrapper.cpp" />
-    <ClCompile Include="src\pyWrappers\pyCarWrapper.cpp" />
-    <ClCompile Include="src\pyWrappers\pyCvarWrapper.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\pyWrappers\pyGameWrapper.cpp" />
-    <ClCompile Include="src\pyWrappers\pyRBActorWrapper.cpp" />
-    <ClCompile Include="src\pyWrappers\pyServerWrapper.cpp" />
-    <ClCompile Include="src\pyWrappers\pyVector.cpp" />
-    <ClCompile Include="src\pyWrappers\pyVehicleWrapper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
