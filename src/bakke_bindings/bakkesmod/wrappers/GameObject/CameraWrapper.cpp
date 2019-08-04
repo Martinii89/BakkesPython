@@ -34,6 +34,7 @@ void bind_bakkesmod_wrappers_GameObject_CameraWrapper(py::module &M)
 		cl.def("GetFOV", (float (CameraWrapper::*)()) &CameraWrapper::GetFOV, "C++: CameraWrapper::GetFOV() --> float");
 		cl.def("SetLockedFOV", (void (CameraWrapper::*)(bool)) &CameraWrapper::SetLockedFOV, "C++: CameraWrapper::SetLockedFOV(bool) --> void", pybind11::arg("lock"));
 		cl.def("GetCameraAsActor", (class ActorWrapper (CameraWrapper::*)()) &CameraWrapper::GetCameraAsActor, "C++: CameraWrapper::GetCameraAsActor() --> class ActorWrapper");
+		cl.def("GetCameraState", (std::string (CameraWrapper::*)()) &CameraWrapper::GetCameraState, "C++: CameraWrapper::GetCameraState() --> std::string");
 		cl.def("linterp", (struct Vector (CameraWrapper::*)(struct Vector, struct Vector, float, float)) &CameraWrapper::linterp, "C++: CameraWrapper::linterp(struct Vector, struct Vector, float, float) --> struct Vector", pybind11::arg("start"), pybind11::arg("end"), pybind11::arg("elapsed"), pybind11::arg("speed"));
 		cl.def("GetSwivelFastSpeed", (float (CameraWrapper::*)()) &CameraWrapper::GetSwivelFastSpeed, "C++: CameraWrapper::GetSwivelFastSpeed() --> float");
 		cl.def("SetSwivelFastSpeed", (void (CameraWrapper::*)(float)) &CameraWrapper::SetSwivelFastSpeed, "C++: CameraWrapper::SetSwivelFastSpeed(float) --> void", pybind11::arg("newSwivelFastSpeed"));
@@ -110,8 +111,6 @@ void bind_bakkesmod_wrappers_GameObject_CameraWrapper(py::module &M)
 		cl.def("SetLastBoostAmount", (void (BoostWrapper::*)(float)) &BoostWrapper::SetLastBoostAmount, "C++: BoostWrapper::SetLastBoostAmount(float) --> void", pybind11::arg("newLastBoostAmount"));
 		cl.def("GetbPendingConfirmBoostAmount", (unsigned long (BoostWrapper::*)()) &BoostWrapper::GetbPendingConfirmBoostAmount, "C++: BoostWrapper::GetbPendingConfirmBoostAmount() --> unsigned long");
 		cl.def("SetbPendingConfirmBoostAmount", (void (BoostWrapper::*)(unsigned long)) &BoostWrapper::SetbPendingConfirmBoostAmount, "C++: BoostWrapper::SetbPendingConfirmBoostAmount(unsigned long) --> void", pybind11::arg("newbPendingConfirmBoostAmount"));
-		//cl.def("GetbUnlimitedBoost", (unsigned long (BoostWrapper::*)()) &BoostWrapper::GetbUnlimitedBoost, "C++: BoostWrapper::GetbUnlimitedBoost() --> unsigned long");
-		//cl.def("SetbUnlimitedBoost", (void (BoostWrapper::*)(unsigned long)) &BoostWrapper::SetbUnlimitedBoost, "C++: BoostWrapper::SetbUnlimitedBoost(unsigned long) --> void", pybind11::arg("newbUnlimitedBoost"));
 		cl.def("GetbNoBoost", (unsigned long (BoostWrapper::*)()) &BoostWrapper::GetbNoBoost, "C++: BoostWrapper::GetbNoBoost() --> unsigned long");
 		cl.def("SetbNoBoost", (void (BoostWrapper::*)(unsigned long)) &BoostWrapper::SetbNoBoost, "C++: BoostWrapper::SetbNoBoost(unsigned long) --> void", pybind11::arg("newbNoBoost"));
 		cl.def("GetBoostForce", (float (BoostWrapper::*)()) &BoostWrapper::GetBoostForce, "C++: BoostWrapper::GetBoostForce() --> float");

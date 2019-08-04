@@ -13,6 +13,7 @@ void bind_unknown_unknown_7(py::module &M);
 void bind_unknown_unknown_8(py::module &M);
 void bind_bakkesmod_wrappers_arraywrapper(py::module &M);
 void bind_unknown_unknown_9(py::module &M);
+void bind_bakkesmod_wrappers_Engine_UnrealStringWrapper(py::module &M);
 void bind_unknown_unknown_10(py::module &M);
 void bind_bakkesmod_wrappers_GameEvent_GameEditorWrapper(py::module &M);
 void bind_bakkesmod_wrappers_GameEvent_ReplayDirectorWrapper(py::module &M);
@@ -25,13 +26,13 @@ void bind_bakkesmod_wrappers_GameObject_CarComponent_DodgeComponentWrapper(py::m
 void bind_bakkesmod_wrappers_GameObject_CarComponent_PrimitiveComponentWrapper(py::module &M);
 void bind_bakkesmod_wrappers_GameObject_CarComponent_VehicleSimWrapper(py::module &M);
 void bind_bakkesmod_wrappers_GameObject_PerformanceStats_PerfStatGraphWrapper(py::module &M);
-void bind_bakkesmod_wrappers_GameObject_PerformanceStats_StatGraphSystemWrapper(py::module &M);
 void bind_unknown_unknown_13(py::module &M);
-void bind_bakkesmod_wrappers_GameObject_RumbleComponent_BallLassoPickup(py::module &M);
-void bind_bakkesmod_wrappers_GameObject_RumbleComponent_GravityPickup(py::module &M);
-void bind_bakkesmod_wrappers_GameObject_RumbleComponent_VelcroPickup(py::module &M);
+void bind_bakkesmod_wrappers_GameObject_RumbleComponent_BallCarSpringPickup(py::module &M);
+void bind_bakkesmod_wrappers_GameObject_RumbleComponent_GrapplingHookPickup(py::module &M);
+void bind_bakkesmod_wrappers_GameObject_RumbleComponent_HitForcePickup(py::module &M);
 void bind_unknown_unknown_14(py::module &M);
 void bind_unknown_unknown_15(py::module &M);
+void bind_unknown_unknown_16(py::module &M);
 
 
 PYBIND11_EMBEDDED_MODULE(pybakke, M) {
@@ -50,6 +51,7 @@ PYBIND11_EMBEDDED_MODULE(pybakke, M) {
 	bind_unknown_unknown_8(M);
 	bind_bakkesmod_wrappers_arraywrapper(M);
 	bind_unknown_unknown_9(M);
+	bind_bakkesmod_wrappers_Engine_UnrealStringWrapper(M);
 	bind_unknown_unknown_10(M);
 	bind_bakkesmod_wrappers_GameEvent_GameEditorWrapper(M);
 	bind_bakkesmod_wrappers_GameEvent_ReplayDirectorWrapper(M);
@@ -62,12 +64,12 @@ PYBIND11_EMBEDDED_MODULE(pybakke, M) {
 	bind_bakkesmod_wrappers_GameObject_CarComponent_PrimitiveComponentWrapper(M);
 	bind_bakkesmod_wrappers_GameObject_CarComponent_VehicleSimWrapper(M);
 	bind_bakkesmod_wrappers_GameObject_PerformanceStats_PerfStatGraphWrapper(M);
-	bind_bakkesmod_wrappers_GameObject_PerformanceStats_StatGraphSystemWrapper(M);
 	bind_unknown_unknown_13(M);
-	bind_bakkesmod_wrappers_GameObject_RumbleComponent_BallLassoPickup(M);
-	bind_bakkesmod_wrappers_GameObject_RumbleComponent_GravityPickup(M);
-	bind_bakkesmod_wrappers_GameObject_RumbleComponent_VelcroPickup(M);
+	bind_bakkesmod_wrappers_GameObject_RumbleComponent_BallCarSpringPickup(M);
+	bind_bakkesmod_wrappers_GameObject_RumbleComponent_GrapplingHookPickup(M);
+	bind_bakkesmod_wrappers_GameObject_RumbleComponent_HitForcePickup(M);
 	bind_unknown_unknown_14(M);
 	bind_unknown_unknown_15(M);
+	bind_unknown_unknown_16(M);
 
 }

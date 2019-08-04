@@ -28,6 +28,7 @@ void bind_unknown_unknown_3(py::module &M)
 		cl.def("SetBoostCheap", (void (CarWrapper::*)(bool)) &CarWrapper::SetBoostCheap, "C++: CarWrapper::SetBoostCheap(bool) --> void", pybind11::arg("b"));
 		cl.def("SetCarRotation", (void (CarWrapper::*)(struct Rotator)) &CarWrapper::SetCarRotation, "C++: CarWrapper::SetCarRotation(struct Rotator) --> void", pybind11::arg("rotation"));
 		cl.def("ForceBoost", (void (CarWrapper::*)(bool)) &CarWrapper::ForceBoost, "C++: CarWrapper::ForceBoost(bool) --> void", pybind11::arg("force"));
+		cl.def("GetOwnerName", (std::string (CarWrapper::*)()) &CarWrapper::GetOwnerName, "C++: CarWrapper::GetOwnerName() --> std::string");
 		cl.def("Unfreeze", (void (CarWrapper::*)()) &CarWrapper::Unfreeze, "C++: CarWrapper::Unfreeze() --> void");
 		cl.def("GetInput", (struct ControllerInput (CarWrapper::*)()) &CarWrapper::GetInput, "C++: CarWrapper::GetInput() --> struct ControllerInput");
 		cl.def("SetInput", (void (CarWrapper::*)(struct ControllerInput)) &CarWrapper::SetInput, "C++: CarWrapper::SetInput(struct ControllerInput) --> void", pybind11::arg("input"));

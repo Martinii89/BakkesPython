@@ -5,7 +5,7 @@
 #include <bakkesmod/wrappers/GameObject/PerformanceStats/PerfStatGraphWrapper.h>
 #include <bakkesmod/wrappers/GameObject/PerformanceStats/SampleHistoryWrapper.h>
 #include <bakkesmod/wrappers/GameObject/PerformanceStats/SampleRecordSettingsWrapper.h>
-#include <bakkesmod/wrappers/GameObject/PerformanceStats/StartGraphSystemWrapper.h>
+#include <bakkesmod/wrappers/GameObject/PerformanceStats/StatGraphSystemWrapper.h>
 #include <bakkesmod/wrappers/StructArrayWrapper.h>
 #include <bakkesmod/wrappers/arraywrapper.h>
 #include <iterator>
@@ -40,6 +40,8 @@ void bind_bakkesmod_wrappers_GameObject_PerformanceStats_PerfStatGraphWrapper(py
 		cl.def("GetTargetFPS", (float (PerfStatGraphWrapper::*)()) &PerfStatGraphWrapper::GetTargetFPS, "C++: PerfStatGraphWrapper::GetTargetFPS() --> float");
 		cl.def("SetTargetFPS", (void (PerfStatGraphWrapper::*)(float)) &PerfStatGraphWrapper::SetTargetFPS, "C++: PerfStatGraphWrapper::SetTargetFPS(float) --> void", pybind11::arg("newTargetFPS"));
 		cl.def("eventUpdateGraphRanges", (void (PerfStatGraphWrapper::*)()) &PerfStatGraphWrapper::eventUpdateGraphRanges, "C++: PerfStatGraphWrapper::eventUpdateGraphRanges() --> void");
+		cl.def("CreateFrameTimeHistory", (class SampleHistoryWrapper (PerfStatGraphWrapper::*)(std::string)) &PerfStatGraphWrapper::CreateFrameTimeHistory, "C++: PerfStatGraphWrapper::CreateFrameTimeHistory(std::string) --> class SampleHistoryWrapper", pybind11::arg("Title"));
+		cl.def("CreateFpsHistory", (class SampleHistoryWrapper (PerfStatGraphWrapper::*)(std::string)) &PerfStatGraphWrapper::CreateFpsHistory, "C++: PerfStatGraphWrapper::CreateFpsHistory(std::string) --> class SampleHistoryWrapper", pybind11::arg("Title"));
 		cl.def("eventConstruct", (void (PerfStatGraphWrapper::*)()) &PerfStatGraphWrapper::eventConstruct, "C++: PerfStatGraphWrapper::eventConstruct() --> void");
 	}
 	{ // SampleHistoryWrapper file:bakkesmod/wrappers/GameObject/PerformanceStats/SampleHistoryWrapper.h line:10
@@ -78,6 +80,7 @@ void bind_bakkesmod_wrappers_GameObject_PerformanceStats_PerfStatGraphWrapper(py
 		cl.def("SetBaseValue2", (class SampleHistoryWrapper (SampleHistoryWrapper::*)(float)) &SampleHistoryWrapper::SetBaseValue2, "C++: SampleHistoryWrapper::SetBaseValue2(float) --> class SampleHistoryWrapper", pybind11::arg("InBaseValue"));
 		cl.def("SetGoodBadValues", (class SampleHistoryWrapper (SampleHistoryWrapper::*)(float, float)) &SampleHistoryWrapper::SetGoodBadValues, "C++: SampleHistoryWrapper::SetGoodBadValues(float, float) --> class SampleHistoryWrapper", pybind11::arg("InGoodValue"), pybind11::arg("InBadValue"));
 		cl.def("SetGraphMaxMin", (class SampleHistoryWrapper (SampleHistoryWrapper::*)(float, float)) &SampleHistoryWrapper::SetGraphMaxMin, "C++: SampleHistoryWrapper::SetGraphMaxMin(float, float) --> class SampleHistoryWrapper", pybind11::arg("MaxValue"), pybind11::arg("MinValue"));
+		cl.def("SetTitle", (class SampleHistoryWrapper (SampleHistoryWrapper::*)(std::string)) &SampleHistoryWrapper::SetTitle, "C++: SampleHistoryWrapper::SetTitle(std::string) --> class SampleHistoryWrapper", pybind11::arg("InTitle"));
 	}
 	{ // SampleRecordSettingsWrapper file:bakkesmod/wrappers/GameObject/PerformanceStats/SampleRecordSettingsWrapper.h line:7
 		pybind11::class_<SampleRecordSettingsWrapper, std::shared_ptr<SampleRecordSettingsWrapper>, ObjectWrapper> cl(M, "SampleRecordSettingsWrapper");
@@ -92,29 +95,33 @@ void bind_bakkesmod_wrappers_GameObject_PerformanceStats_PerfStatGraphWrapper(py
 		cl.def("GetRecordRate", (float (SampleRecordSettingsWrapper::*)()) &SampleRecordSettingsWrapper::GetRecordRate, "C++: SampleRecordSettingsWrapper::GetRecordRate() --> float");
 		cl.def("SetRecordRate", (void (SampleRecordSettingsWrapper::*)(float)) &SampleRecordSettingsWrapper::SetRecordRate, "C++: SampleRecordSettingsWrapper::SetRecordRate(float) --> void", pybind11::arg("newRecordRate"));
 	}
-	//{ // StartGraphSystemWrapper file:bakkesmod/wrappers/GameObject/PerformanceStats/StartGraphSystemWrapper.h line:10
-	//	pybind11::class_<StartGraphSystemWrapper, std::shared_ptr<StartGraphSystemWrapper>, ObjectWrapper> cl(M, "StartGraphSystemWrapper");
-	//	pybind11::handle cl_type = cl;
+	{ // StatGraphSystemWrapper file:bakkesmod/wrappers/GameObject/PerformanceStats/StatGraphSystemWrapper.h line:11
+		pybind11::class_<StatGraphSystemWrapper, std::shared_ptr<StatGraphSystemWrapper>, ObjectWrapper> cl(M, "StatGraphSystemWrapper");
+		pybind11::handle cl_type = cl;
 
-	//	cl.def( pybind11::init<unsigned long>(), pybind11::arg("mem") );
+		cl.def( pybind11::init<unsigned long>(), pybind11::arg("mem") );
 
-	//	cl.def( pybind11::init( [](StartGraphSystemWrapper const &o){ return new StartGraphSystemWrapper(o); } ) );
-	//	cl.def("assign", (class StartGraphSystemWrapper & (StartGraphSystemWrapper::*)(class StartGraphSystemWrapper)) &StartGraphSystemWrapper::operator=, "C++: StartGraphSystemWrapper::operator=(class StartGraphSystemWrapper) --> class StartGraphSystemWrapper &", pybind11::return_value_policy::automatic, pybind11::arg("rhs"));
-	//	cl.def("GetGraphSampleTime", (float (StartGraphSystemWrapper::*)()) &StartGraphSystemWrapper::GetGraphSampleTime, "C++: StartGraphSystemWrapper::GetGraphSampleTime() --> float");
-	//	cl.def("SetGraphSampleTime", (void (StartGraphSystemWrapper::*)(float)) &StartGraphSystemWrapper::SetGraphSampleTime, "C++: StartGraphSystemWrapper::SetGraphSampleTime(float) --> void", pybind11::arg("newGraphSampleTime"));
-	//	cl.def("GetGraphLevel", (unsigned char (StartGraphSystemWrapper::*)()) &StartGraphSystemWrapper::GetGraphLevel, "C++: StartGraphSystemWrapper::GetGraphLevel() --> unsigned char");
-	//	cl.def("SetGraphLevel", (void (StartGraphSystemWrapper::*)(unsigned char)) &StartGraphSystemWrapper::SetGraphLevel, "C++: StartGraphSystemWrapper::SetGraphLevel(unsigned char) --> void", pybind11::arg("newGraphLevel"));
-	//	cl.def("GetPerfStatGraph", (class PerfStatGraphWrapper (StartGraphSystemWrapper::*)()) &StartGraphSystemWrapper::GetPerfStatGraph, "C++: StartGraphSystemWrapper::GetPerfStatGraph() --> class PerfStatGraphWrapper");
-	//	cl.def("SetPerfStatGraph", (void (StartGraphSystemWrapper::*)(class PerfStatGraphWrapper)) &StartGraphSystemWrapper::SetPerfStatGraph, "C++: StartGraphSystemWrapper::SetPerfStatGraph(class PerfStatGraphWrapper) --> void", pybind11::arg("newPerfStatGraph"));
-	//	cl.def("GetNetStatGraph", (class NetStatGraphWrapper (StartGraphSystemWrapper::*)()) &StartGraphSystemWrapper::GetNetStatGraph, "C++: StartGraphSystemWrapper::GetNetStatGraph() --> class NetStatGraphWrapper");
-	//	cl.def("SetNetStatGraph", (void (StartGraphSystemWrapper::*)(class NetStatGraphWrapper)) &StartGraphSystemWrapper::SetNetStatGraph, "C++: StartGraphSystemWrapper::SetNetStatGraph(class NetStatGraphWrapper) --> void", pybind11::arg("newNetStatGraph"));
-	//	cl.def("GetInputBufferGraph", (class InputBufferGraphWrapper (StartGraphSystemWrapper::*)()) &StartGraphSystemWrapper::GetInputBufferGraph, "C++: StartGraphSystemWrapper::GetInputBufferGraph() --> class InputBufferGraphWrapper");
-	//	cl.def("SetInputBufferGraph", (void (StartGraphSystemWrapper::*)(class InputBufferGraphWrapper)) &StartGraphSystemWrapper::SetInputBufferGraph, "C++: StartGraphSystemWrapper::SetInputBufferGraph(class InputBufferGraphWrapper) --> void", pybind11::arg("newInputBufferGraph"));
-	//	cl.def("GetStatGraphs", (class ArrayWrapper<class StatGraphWrapper> (StartGraphSystemWrapper::*)()) &StartGraphSystemWrapper::GetStatGraphs, "C++: StartGraphSystemWrapper::GetStatGraphs() --> class ArrayWrapper<class StatGraphWrapper>");
-	//	cl.def("GetVisibleStatGraphs", (class ArrayWrapper<class StatGraphWrapper> (StartGraphSystemWrapper::*)()) &StartGraphSystemWrapper::GetVisibleStatGraphs, "C++: StartGraphSystemWrapper::GetVisibleStatGraphs() --> class ArrayWrapper<class StatGraphWrapper>");
-	//	cl.def("Graphtime", (void (StartGraphSystemWrapper::*)(float)) &StartGraphSystemWrapper::Graphtime, "C++: StartGraphSystemWrapper::Graphtime(float) --> void", pybind11::arg("Seconds"));
-	//	cl.def("StatGraphNext", (void (StartGraphSystemWrapper::*)()) &StartGraphSystemWrapper::StatGraphNext, "C++: StartGraphSystemWrapper::StatGraphNext() --> void");
-	//	cl.def("GetGraphSampleTime2", (float (StartGraphSystemWrapper::*)(unsigned char)) &StartGraphSystemWrapper::GetGraphSampleTime2, "C++: StartGraphSystemWrapper::GetGraphSampleTime2(unsigned char) --> float", pybind11::arg("Level"));
-	//	cl.def("SetGraphLevel2", (void (StartGraphSystemWrapper::*)(unsigned char)) &StartGraphSystemWrapper::SetGraphLevel2, "C++: StartGraphSystemWrapper::SetGraphLevel2(unsigned char) --> void", pybind11::arg("Level"));
-	//}
+		cl.def( pybind11::init( [](StatGraphSystemWrapper const &o){ return new StatGraphSystemWrapper(o); } ) );
+		cl.def("assign", (class StatGraphSystemWrapper & (StatGraphSystemWrapper::*)(class StatGraphSystemWrapper)) &StatGraphSystemWrapper::operator=, "C++: StatGraphSystemWrapper::operator=(class StatGraphSystemWrapper) --> class StatGraphSystemWrapper &", pybind11::return_value_policy::automatic, pybind11::arg("rhs"));
+		cl.def("GetGraphSampleTime", (float (StatGraphSystemWrapper::*)()) &StatGraphSystemWrapper::GetGraphSampleTime, "C++: StatGraphSystemWrapper::GetGraphSampleTime() --> float");
+		cl.def("SetGraphSampleTime", (void (StatGraphSystemWrapper::*)(float)) &StatGraphSystemWrapper::SetGraphSampleTime, "C++: StatGraphSystemWrapper::SetGraphSampleTime(float) --> void", pybind11::arg("newGraphSampleTime"));
+		cl.def("GetGraphLevel", (unsigned char (StatGraphSystemWrapper::*)()) &StatGraphSystemWrapper::GetGraphLevel, "C++: StatGraphSystemWrapper::GetGraphLevel() --> unsigned char");
+		cl.def("SetGraphLevel", (void (StatGraphSystemWrapper::*)(unsigned char)) &StatGraphSystemWrapper::SetGraphLevel, "C++: StatGraphSystemWrapper::SetGraphLevel(unsigned char) --> void", pybind11::arg("newGraphLevel"));
+		cl.def("GetPerfStatGraph", (class PerfStatGraphWrapper (StatGraphSystemWrapper::*)()) &StatGraphSystemWrapper::GetPerfStatGraph, "C++: StatGraphSystemWrapper::GetPerfStatGraph() --> class PerfStatGraphWrapper");
+		cl.def("SetPerfStatGraph", (void (StatGraphSystemWrapper::*)(class PerfStatGraphWrapper)) &StatGraphSystemWrapper::SetPerfStatGraph, "C++: StatGraphSystemWrapper::SetPerfStatGraph(class PerfStatGraphWrapper) --> void", pybind11::arg("newPerfStatGraph"));
+		cl.def("GetNetStatGraph", (class NetStatGraphWrapper (StatGraphSystemWrapper::*)()) &StatGraphSystemWrapper::GetNetStatGraph, "C++: StatGraphSystemWrapper::GetNetStatGraph() --> class NetStatGraphWrapper");
+		cl.def("SetNetStatGraph", (void (StatGraphSystemWrapper::*)(class NetStatGraphWrapper)) &StatGraphSystemWrapper::SetNetStatGraph, "C++: StatGraphSystemWrapper::SetNetStatGraph(class NetStatGraphWrapper) --> void", pybind11::arg("newNetStatGraph"));
+		cl.def("GetInputBufferGraph", (class InputBufferGraphWrapper (StatGraphSystemWrapper::*)()) &StatGraphSystemWrapper::GetInputBufferGraph, "C++: StatGraphSystemWrapper::GetInputBufferGraph() --> class InputBufferGraphWrapper");
+		cl.def("SetInputBufferGraph", (void (StatGraphSystemWrapper::*)(class InputBufferGraphWrapper)) &StatGraphSystemWrapper::SetInputBufferGraph, "C++: StatGraphSystemWrapper::SetInputBufferGraph(class InputBufferGraphWrapper) --> void", pybind11::arg("newInputBufferGraph"));
+		cl.def("GetStatGraphs", (class ArrayWrapper<class StatGraphWrapper> (StatGraphSystemWrapper::*)()) &StatGraphSystemWrapper::GetStatGraphs, "C++: StatGraphSystemWrapper::GetStatGraphs() --> class ArrayWrapper<class StatGraphWrapper>");
+		cl.def("GetVisibleStatGraphs", (class ArrayWrapper<class StatGraphWrapper> (StatGraphSystemWrapper::*)()) &StatGraphSystemWrapper::GetVisibleStatGraphs, "C++: StatGraphSystemWrapper::GetVisibleStatGraphs() --> class ArrayWrapper<class StatGraphWrapper>");
+		cl.def("GetPreallocGraphLines", (int (StatGraphSystemWrapper::*)()) &StatGraphSystemWrapper::GetPreallocGraphLines, "C++: StatGraphSystemWrapper::GetPreallocGraphLines() --> int");
+		cl.def("SetPreallocGraphLines", (void (StatGraphSystemWrapper::*)(int)) &StatGraphSystemWrapper::SetPreallocGraphLines, "C++: StatGraphSystemWrapper::SetPreallocGraphLines(int) --> void", pybind11::arg("newPreallocGraphLines"));
+		cl.def("__StatGraphSystem_TA__SetGraphLevel", (void (StatGraphSystemWrapper::*)(class StatGraphWrapper)) &StatGraphSystemWrapper::__StatGraphSystem_TA__SetGraphLevel, "C++: StatGraphSystemWrapper::__StatGraphSystem_TA__SetGraphLevel(class StatGraphWrapper) --> void", pybind11::arg("G"));
+		cl.def("PacketReceived", (void (StatGraphSystemWrapper::*)(float)) &StatGraphSystemWrapper::PacketReceived, "C++: StatGraphSystemWrapper::PacketReceived(float) --> void", pybind11::arg("Latency"));
+		cl.def("Graphtime", (void (StatGraphSystemWrapper::*)(float)) &StatGraphSystemWrapper::Graphtime, "C++: StatGraphSystemWrapper::Graphtime(float) --> void", pybind11::arg("Seconds"));
+		cl.def("StatGraphNext", (void (StatGraphSystemWrapper::*)()) &StatGraphSystemWrapper::StatGraphNext, "C++: StatGraphSystemWrapper::StatGraphNext() --> void");
+		cl.def("GetGraphSampleTime2", (float (StatGraphSystemWrapper::*)(unsigned char)) &StatGraphSystemWrapper::GetGraphSampleTime2, "C++: StatGraphSystemWrapper::GetGraphSampleTime2(unsigned char) --> float", pybind11::arg("Level"));
+		cl.def("SetGraphLevel2", (void (StatGraphSystemWrapper::*)(unsigned char)) &StatGraphSystemWrapper::SetGraphLevel2, "C++: StatGraphSystemWrapper::SetGraphLevel2(unsigned char) --> void", pybind11::arg("Level"));
+	}
 }

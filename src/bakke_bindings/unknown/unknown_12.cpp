@@ -134,6 +134,7 @@ void bind_unknown_unknown_12(py::module &M)
 		cl.def("SetRoundTimeLimit", (void (TrainingEditorWrapper::*)(float)) &TrainingEditorWrapper::SetRoundTimeLimit, "C++: TrainingEditorWrapper::SetRoundTimeLimit(float) --> void", pybind11::arg("NewRoundTime"));
 		cl.def("HandleNextGame", (bool (TrainingEditorWrapper::*)()) &TrainingEditorWrapper::HandleNextGame, "C++: TrainingEditorWrapper::HandleNextGame() --> bool");
 		cl.def("ResetBalls", (void (TrainingEditorWrapper::*)()) &TrainingEditorWrapper::ResetBalls, "C++: TrainingEditorWrapper::ResetBalls() --> void");
+		cl.def("Load2", (void (TrainingEditorWrapper::*)(std::string, class PlayerControllerWrapper)) &TrainingEditorWrapper::Load2, "C++: TrainingEditorWrapper::Load2(std::string, class PlayerControllerWrapper) --> void", pybind11::arg("SaveName"), pybind11::arg("PC"));
 		cl.def("DestroyGoalMeshBlockers", (void (TrainingEditorWrapper::*)()) &TrainingEditorWrapper::DestroyGoalMeshBlockers, "C++: TrainingEditorWrapper::DestroyGoalMeshBlockers() --> void");
 		cl.def("UpdateGoalMeshBlocker", (void (TrainingEditorWrapper::*)()) &TrainingEditorWrapper::UpdateGoalMeshBlocker, "C++: TrainingEditorWrapper::UpdateGoalMeshBlocker() --> void");
 		cl.def("GetScore", (int (TrainingEditorWrapper::*)()) &TrainingEditorWrapper::GetScore, "C++: TrainingEditorWrapper::GetScore() --> int");

@@ -174,6 +174,7 @@ void bind_unknown_unknown_4(py::module &M)
 		cl.def("OverrideWith", (void (PlayerReplicationInfoWrapper::*)(class PlayerReplicationInfoWrapper)) &PlayerReplicationInfoWrapper::OverrideWith, "C++: PlayerReplicationInfoWrapper::OverrideWith(class PlayerReplicationInfoWrapper) --> void", pybind11::arg("PRI"));
 		cl.def("Duplicate", (class PlayerReplicationInfoWrapper (PlayerReplicationInfoWrapper::*)()) &PlayerReplicationInfoWrapper::Duplicate, "C++: PlayerReplicationInfoWrapper::Duplicate() --> class PlayerReplicationInfoWrapper");
 		cl.def("SetWaitingPlayer", (void (PlayerReplicationInfoWrapper::*)(unsigned long)) &PlayerReplicationInfoWrapper::SetWaitingPlayer, "C++: PlayerReplicationInfoWrapper::SetWaitingPlayer(unsigned long) --> void", pybind11::arg("B"));
+		cl.def("eventSetPlayerName", (void (PlayerReplicationInfoWrapper::*)(std::string)) &PlayerReplicationInfoWrapper::eventSetPlayerName, "C++: PlayerReplicationInfoWrapper::eventSetPlayerName(std::string) --> void", pybind11::arg("S"));
 		cl.def("Reset", (void (PlayerReplicationInfoWrapper::*)()) &PlayerReplicationInfoWrapper::Reset, "C++: PlayerReplicationInfoWrapper::Reset() --> void");
 		cl.def("eventDestroyed", (void (PlayerReplicationInfoWrapper::*)()) &PlayerReplicationInfoWrapper::eventDestroyed, "C++: PlayerReplicationInfoWrapper::eventDestroyed() --> void");
 		cl.def("Unregister2", (void (PlayerReplicationInfoWrapper::*)()) &PlayerReplicationInfoWrapper::Unregister2, "C++: PlayerReplicationInfoWrapper::Unregister2() --> void");

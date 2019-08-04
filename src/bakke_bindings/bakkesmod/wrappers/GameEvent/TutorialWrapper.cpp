@@ -101,6 +101,7 @@ void bind_bakkesmod_wrappers_GameEvent_TutorialWrapper(py::module &M)
 		cl.def("StartTimers", (void (TutorialWrapper::*)()) &TutorialWrapper::StartTimers, "C++: TutorialWrapper::StartTimers() --> void");
 		cl.def("UpdateMVP", (void (TutorialWrapper::*)()) &TutorialWrapper::UpdateMVP, "C++: TutorialWrapper::UpdateMVP() --> void");
 		cl.def("AllowDynamicCrowd", (bool (TutorialWrapper::*)()) &TutorialWrapper::AllowDynamicCrowd, "C++: TutorialWrapper::AllowDynamicCrowd() --> bool");
+		cl.def("SetTutorialTip", (void (TutorialWrapper::*)(std::string)) &TutorialWrapper::SetTutorialTip, "C++: TutorialWrapper::SetTutorialTip(std::string) --> void", pybind11::arg("NewTip"));
 		cl.def("SetShowBoostMeter", (void (TutorialWrapper::*)(unsigned long)) &TutorialWrapper::SetShowBoostMeter, "C++: TutorialWrapper::SetShowBoostMeter(unsigned long) --> void", pybind11::arg("bShow"));
 		cl.def("GetStepLoc", (float (TutorialWrapper::*)(int, float, unsigned long, int *)) &TutorialWrapper::GetStepLoc, "C++: TutorialWrapper::GetStepLoc(int, float, unsigned long, int *) --> float", pybind11::arg("Steps"), pybind11::arg("TotalDist"), pybind11::arg("bIncrement"), pybind11::arg("Out_CurrentStep"));
 		cl.def("GetDebugLocationInExtent", (struct Vector (TutorialWrapper::*)(struct Vector &)) &TutorialWrapper::GetDebugLocationInExtent, "C++: TutorialWrapper::GetDebugLocationInExtent(struct Vector &) --> struct Vector", pybind11::arg("Extent"));
@@ -147,6 +148,7 @@ void bind_bakkesmod_wrappers_GameEvent_TutorialWrapper(py::module &M)
 		cl.def("GetShuffledSpawnIndex", (int (TutorialWrapper::*)()) &TutorialWrapper::GetShuffledSpawnIndex, "C++: TutorialWrapper::GetShuffledSpawnIndex() --> int");
 		cl.def("DestroyCannon", (void (TutorialWrapper::*)()) &TutorialWrapper::DestroyCannon, "C++: TutorialWrapper::DestroyCannon() --> void");
 		cl.def("SetCannonOrientation", (void (TutorialWrapper::*)(struct Vector &, struct Rotator &)) &TutorialWrapper::SetCannonOrientation, "C++: TutorialWrapper::SetCannonOrientation(struct Vector &, struct Rotator &) --> void", pybind11::arg("NewLocation"), pybind11::arg("NewRotation"));
+		cl.def("SpawnBall", (class BallWrapper (TutorialWrapper::*)(struct Vector &, unsigned long, unsigned long, std::string)) &TutorialWrapper::SpawnBall, "C++: TutorialWrapper::SpawnBall(struct Vector &, unsigned long, unsigned long, std::string) --> class BallWrapper", pybind11::arg("SpawnLoc"), pybind11::arg("bWake"), pybind11::arg("bSpawnCannon"), pybind11::arg("BallArch"));
 		cl.def("InitBallEffects", (void (TutorialWrapper::*)()) &TutorialWrapper::InitBallEffects, "C++: TutorialWrapper::InitBallEffects() --> void");
 		cl.def("InitBallVelocity", (void (TutorialWrapper::*)()) &TutorialWrapper::InitBallVelocity, "C++: TutorialWrapper::InitBallVelocity() --> void");
 		cl.def("GetRandomGoalAimLocation", (struct Vector (TutorialWrapper::*)(int, struct Vector &)) &TutorialWrapper::GetRandomGoalAimLocation, "C++: TutorialWrapper::GetRandomGoalAimLocation(int, struct Vector &) --> struct Vector", pybind11::arg("InTeamNum"), pybind11::arg("BallLoc"));
@@ -163,5 +165,6 @@ void bind_bakkesmod_wrappers_GameEvent_TutorialWrapper(py::module &M)
 		cl.def("AddLocalPlayer", (void (TutorialWrapper::*)(class PlayerControllerWrapper)) &TutorialWrapper::AddLocalPlayer, "C++: TutorialWrapper::AddLocalPlayer(class PlayerControllerWrapper) --> void", pybind11::arg("Player"));
 		cl.def("HandlePlayerResetTraining", (void (TutorialWrapper::*)(class GameEventWrapper)) &TutorialWrapper::HandlePlayerResetTraining, "C++: TutorialWrapper::HandlePlayerResetTraining(class GameEventWrapper) --> void", pybind11::arg("GameEvent"));
 		cl.def("OnInit", (void (TutorialWrapper::*)()) &TutorialWrapper::OnInit, "C++: TutorialWrapper::OnInit() --> void");
+		cl.def("EventTutorialTipChanged", (void (TutorialWrapper::*)(class TutorialWrapper, std::string)) &TutorialWrapper::EventTutorialTipChanged, "C++: TutorialWrapper::EventTutorialTipChanged(class TutorialWrapper, std::string) --> void", pybind11::arg("GameEvent"), pybind11::arg("NewTip"));
 	}
 }

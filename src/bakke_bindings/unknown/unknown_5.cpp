@@ -30,6 +30,7 @@ void bind_unknown_unknown_5(py::module &M)
 		cl.def("OnTeamChanged", (void (PriXWrapper::*)()) &PriXWrapper::OnTeamChanged, "C++: PriXWrapper::OnTeamChanged() --> void");
 		cl.def("SetPlayerTeam", (void (PriXWrapper::*)(class TeamInfoWrapper)) &PriXWrapper::SetPlayerTeam, "C++: PriXWrapper::SetPlayerTeam(class TeamInfoWrapper) --> void", pybind11::arg("NewTeam"));
 		cl.def("eventOnOwnerChanged", (void (PriXWrapper::*)()) &PriXWrapper::eventOnOwnerChanged, "C++: PriXWrapper::eventOnOwnerChanged() --> void");
+		cl.def("eventSetPlayerName", (void (PriXWrapper::*)(std::string)) &PriXWrapper::eventSetPlayerName, "C++: PriXWrapper::eventSetPlayerName(std::string) --> void", pybind11::arg("S"));
 		cl.def("EventDestroyed", (void (PriXWrapper::*)(class PriXWrapper)) &PriXWrapper::EventDestroyed, "C++: PriXWrapper::EventDestroyed(class PriXWrapper) --> void", pybind11::arg("PRI"));
 		cl.def("EventTeamChanged", (void (PriXWrapper::*)(class PriXWrapper)) &PriXWrapper::EventTeamChanged, "C++: PriXWrapper::EventTeamChanged(class PriXWrapper) --> void", pybind11::arg("PRI"));
 		cl.def("EventUniqueIdChanged", (void (PriXWrapper::*)(class PriXWrapper)) &PriXWrapper::EventUniqueIdChanged, "C++: PriXWrapper::EventUniqueIdChanged(class PriXWrapper) --> void", pybind11::arg("PRI"));
@@ -87,16 +88,12 @@ void bind_unknown_unknown_5(py::module &M)
 		cl.def("SetbUsingFreecam", (void (PriWrapper::*)(unsigned long)) &PriWrapper::SetbUsingFreecam, "C++: PriWrapper::SetbUsingFreecam(unsigned long) --> void", pybind11::arg("newbUsingFreecam"));
 		cl.def("GetbIsInSplitScreen", (unsigned long (PriWrapper::*)()) &PriWrapper::GetbIsInSplitScreen, "C++: PriWrapper::GetbIsInSplitScreen() --> unsigned long");
 		cl.def("SetbIsInSplitScreen", (void (PriWrapper::*)(unsigned long)) &PriWrapper::SetbIsInSplitScreen, "C++: PriWrapper::SetbIsInSplitScreen(unsigned long) --> void", pybind11::arg("newbIsInSplitScreen"));
-		//cl.def("GetbDeveloper", (unsigned long (PriWrapper::*)()) &PriWrapper::GetbDeveloper, "C++: PriWrapper::GetbDeveloper() --> unsigned long");
-		//cl.def("SetbDeveloper", (void (PriWrapper::*)(unsigned long)) &PriWrapper::SetbDeveloper, "C++: PriWrapper::SetbDeveloper(unsigned long) --> void", pybind11::arg("newbDeveloper"));
 		cl.def("GetbStartVoteToForfeitDisabled", (unsigned long (PriWrapper::*)()) &PriWrapper::GetbStartVoteToForfeitDisabled, "C++: PriWrapper::GetbStartVoteToForfeitDisabled() --> unsigned long");
 		cl.def("SetbStartVoteToForfeitDisabled", (void (PriWrapper::*)(unsigned long)) &PriWrapper::SetbStartVoteToForfeitDisabled, "C++: PriWrapper::SetbStartVoteToForfeitDisabled(unsigned long) --> void", pybind11::arg("newbStartVoteToForfeitDisabled"));
 		cl.def("GetbUsingItems", (unsigned long (PriWrapper::*)()) &PriWrapper::GetbUsingItems, "C++: PriWrapper::GetbUsingItems() --> unsigned long");
 		cl.def("SetbUsingItems", (void (PriWrapper::*)(unsigned long)) &PriWrapper::SetbUsingItems, "C++: PriWrapper::SetbUsingItems(unsigned long) --> void", pybind11::arg("newbUsingItems"));
 		cl.def("GetPlayerHistoryValid", (unsigned long (PriWrapper::*)()) &PriWrapper::GetPlayerHistoryValid, "C++: PriWrapper::GetPlayerHistoryValid() --> unsigned long");
 		cl.def("SetPlayerHistoryValid", (void (PriWrapper::*)(unsigned long)) &PriWrapper::SetPlayerHistoryValid, "C++: PriWrapper::SetPlayerHistoryValid(unsigned long) --> void", pybind11::arg("newPlayerHistoryValid"));
-		//cl.def("GetbPlayedWithGamepad", (unsigned long (PriWrapper::*)()) &PriWrapper::GetbPlayedWithGamepad, "C++: PriWrapper::GetbPlayedWithGamepad() --> unsigned long");
-		//cl.def("SetbPlayedWithGamepad", (void (PriWrapper::*)(unsigned long)) &PriWrapper::SetbPlayedWithGamepad, "C++: PriWrapper::SetbPlayedWithGamepad(unsigned long) --> void", pybind11::arg("newbPlayedWithGamepad"));
 		cl.def("GetGameEvent", (class GameEventWrapper (PriWrapper::*)()) &PriWrapper::GetGameEvent, "C++: PriWrapper::GetGameEvent() --> class GameEventWrapper");
 		cl.def("SetGameEvent", (void (PriWrapper::*)(class GameEventWrapper)) &PriWrapper::SetGameEvent, "C++: PriWrapper::SetGameEvent(class GameEventWrapper) --> void", pybind11::arg("newGameEvent"));
 		cl.def("GetReplicatedGameEvent", (class GameEventWrapper (PriWrapper::*)()) &PriWrapper::GetReplicatedGameEvent, "C++: PriWrapper::GetReplicatedGameEvent() --> class GameEventWrapper");
@@ -121,10 +118,6 @@ void bind_unknown_unknown_5(py::module &M)
 		cl.def("SetReplicatedWorstNetQualityBeyondLatency", (void (PriWrapper::*)(unsigned char)) &PriWrapper::SetReplicatedWorstNetQualityBeyondLatency, "C++: PriWrapper::SetReplicatedWorstNetQualityBeyondLatency(unsigned char) --> void", pybind11::arg("newReplicatedWorstNetQualityBeyondLatency"));
 		cl.def("GetPartyLeader", (struct SteamID (PriWrapper::*)()) &PriWrapper::GetPartyLeader, "C++: PriWrapper::GetPartyLeader() --> struct SteamID");
 		cl.def("SetPartyLeader", (void (PriWrapper::*)(struct SteamID)) &PriWrapper::SetPartyLeader, "C++: PriWrapper::SetPartyLeader(struct SteamID) --> void", pybind11::arg("newPartyLeader"));
-		//cl.def("GetTotalXP", (int (PriWrapper::*)()) &PriWrapper::GetTotalXP, "C++: PriWrapper::GetTotalXP() --> int");
-		//cl.def("SetTotalXP", (void (PriWrapper::*)(int)) &PriWrapper::SetTotalXP, "C++: PriWrapper::SetTotalXP(int) --> void", pybind11::arg("newTotalXP"));
-		//cl.def("GetXpLevel", (int (PriWrapper::*)()) &PriWrapper::GetXpLevel, "C++: PriWrapper::GetXpLevel() --> int");
-		//cl.def("SetXpLevel", (void (PriWrapper::*)(int)) &PriWrapper::SetXpLevel, "C++: PriWrapper::SetXpLevel(int) --> void", pybind11::arg("newXpLevel"));
 		cl.def("GetDodgeInputThreshold", (float (PriWrapper::*)()) &PriWrapper::GetDodgeInputThreshold, "C++: PriWrapper::GetDodgeInputThreshold() --> float");
 		cl.def("SetDodgeInputThreshold", (void (PriWrapper::*)(float)) &PriWrapper::SetDodgeInputThreshold, "C++: PriWrapper::SetDodgeInputThreshold(float) --> void", pybind11::arg("newDodgeInputThreshold"));
 		cl.def("GetSteeringSensitivity", (float (PriWrapper::*)()) &PriWrapper::GetSteeringSensitivity, "C++: PriWrapper::GetSteeringSensitivity() --> float");
@@ -158,6 +151,7 @@ void bind_unknown_unknown_5(py::module &M)
 		cl.def("eventDestroyed", (void (PriWrapper::*)()) &PriWrapper::eventDestroyed, "C++: PriWrapper::eventDestroyed() --> void");
 		cl.def("OnSpectatorShortcutChanged", (void (PriWrapper::*)()) &PriWrapper::OnSpectatorShortcutChanged, "C++: PriWrapper::OnSpectatorShortcutChanged() --> void");
 		cl.def("SetSpectatorShortcut2", (void (PriWrapper::*)(int)) &PriWrapper::SetSpectatorShortcut2, "C++: PriWrapper::SetSpectatorShortcut2(int) --> void", pybind11::arg("InShortcut"));
+		cl.def("ServerSetPublicIP", (void (PriWrapper::*)(std::string)) &PriWrapper::ServerSetPublicIP, "C++: PriWrapper::ServerSetPublicIP(std::string) --> void", pybind11::arg("IP"));
 		cl.def("OnUniqueIdChanged", (void (PriWrapper::*)()) &PriWrapper::OnUniqueIdChanged, "C++: PriWrapper::OnUniqueIdChanged() --> void");
 		cl.def("UpdatePlayerAvatarBorder", (void (PriWrapper::*)()) &PriWrapper::UpdatePlayerAvatarBorder, "C++: PriWrapper::UpdatePlayerAvatarBorder() --> void");
 		cl.def("UpdatePlayerBanner", (void (PriWrapper::*)()) &PriWrapper::UpdatePlayerBanner, "C++: PriWrapper::UpdatePlayerBanner() --> void");
@@ -168,6 +162,7 @@ void bind_unknown_unknown_5(py::module &M)
 		cl.def("OnReplacingBotPRIChanged", (void (PriWrapper::*)()) &PriWrapper::OnReplacingBotPRIChanged, "C++: PriWrapper::OnReplacingBotPRIChanged() --> void");
 		cl.def("OnTeamChanged", (void (PriWrapper::*)()) &PriWrapper::OnTeamChanged, "C++: PriWrapper::OnTeamChanged() --> void");
 		cl.def("ClearBotReplacement", (void (PriWrapper::*)()) &PriWrapper::ClearBotReplacement, "C++: PriWrapper::ClearBotReplacement() --> void");
+		cl.def("ReportCheater", (void (PriWrapper::*)(std::string)) &PriWrapper::ReportCheater, "C++: PriWrapper::ReportCheater(std::string) --> void", pybind11::arg("Reason"));
 		cl.def("ValidateLoadoutTeamPaints", (bool (PriWrapper::*)()) &PriWrapper::ValidateLoadoutTeamPaints, "C++: PriWrapper::ValidateLoadoutTeamPaints() --> bool");
 		cl.def("ValidateLoadoutSlots", (bool (PriWrapper::*)()) &PriWrapper::ValidateLoadoutSlots, "C++: PriWrapper::ValidateLoadoutSlots() --> bool");
 		cl.def("ValidateLoadoutDLC", (void (PriWrapper::*)()) &PriWrapper::ValidateLoadoutDLC, "C++: PriWrapper::ValidateLoadoutDLC() --> void");
@@ -176,8 +171,8 @@ void bind_unknown_unknown_5(py::module &M)
 		cl.def("ServerVoteToForfeit", (void (PriWrapper::*)()) &PriWrapper::ServerVoteToForfeit, "C++: PriWrapper::ServerVoteToForfeit() --> void");
 		cl.def("SetUserCarPreferences", (void (PriWrapper::*)(float, float, float)) &PriWrapper::SetUserCarPreferences, "C++: PriWrapper::SetUserCarPreferences(float, float, float) --> void", pybind11::arg("NewDodgeThreshold"), pybind11::arg("NewSteeringSensitivity"), pybind11::arg("NewAirControlSensitivity"));
 		cl.def("ServerSetUserCarPreferences", (void (PriWrapper::*)(float, float, float)) &PriWrapper::ServerSetUserCarPreferences, "C++: PriWrapper::ServerSetUserCarPreferences(float, float, float) --> void", pybind11::arg("NewDodgeThreshold"), pybind11::arg("NewSteeringSensitivity"), pybind11::arg("NewAirControlSensitivity"));
-		//cl.def("SetXPInfo", (void (PriWrapper::*)(int, int)) &PriWrapper::SetXPInfo, "C++: PriWrapper::SetXPInfo(int, int) --> void", pybind11::arg("InTotalXP"), pybind11::arg("InXPLevel"));
-		//cl.def("SetTotalXP2", (void (PriWrapper::*)(int)) &PriWrapper::SetTotalXP2, "C++: PriWrapper::SetTotalXP2(int) --> void", pybind11::arg("NewXP"));
+		cl.def("ValidateUserInt", (int (PriWrapper::*)(std::string, int, int, int)) &PriWrapper::ValidateUserInt, "C++: PriWrapper::ValidateUserInt(std::string, int, int, int) --> int", pybind11::arg("Reason"), pybind11::arg("NewValue"), pybind11::arg("Min"), pybind11::arg("Max"));
+		cl.def("ValidateUserFloat", (float (PriWrapper::*)(std::string, float, float, float)) &PriWrapper::ValidateUserFloat, "C++: PriWrapper::ValidateUserFloat(std::string, float, float, float) --> float", pybind11::arg("Reason"), pybind11::arg("NewValue"), pybind11::arg("Min"), pybind11::arg("Max"));
 		cl.def("OnPawnTypeChanged", (void (PriWrapper::*)()) &PriWrapper::OnPawnTypeChanged, "C++: PriWrapper::OnPawnTypeChanged() --> void");
 		cl.def("SetWaitingPlayer", (void (PriWrapper::*)(unsigned long)) &PriWrapper::SetWaitingPlayer, "C++: PriWrapper::SetWaitingPlayer(unsigned long) --> void", pybind11::arg("B"));
 		cl.def("SetPawnType2", (void (PriWrapper::*)(unsigned char)) &PriWrapper::SetPawnType2, "C++: PriWrapper::SetPawnType2(unsigned char) --> void", pybind11::arg("NewPawnType"));

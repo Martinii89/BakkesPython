@@ -72,9 +72,12 @@ void bind_unknown_unknown_7(py::module &M)
 		cl.def("NotifyKismetTeamColorChanged", (void (TeamWrapper::*)()) &TeamWrapper::NotifyKismetTeamColorChanged, "C++: TeamWrapper::NotifyKismetTeamColorChanged() --> void");
 		cl.def("UpdateColors", (void (TeamWrapper::*)()) &TeamWrapper::UpdateColors, "C++: TeamWrapper::UpdateColors() --> void");
 		cl.def("SetLogo", (void (TeamWrapper::*)(int, unsigned long)) &TeamWrapper::SetLogo, "C++: TeamWrapper::SetLogo(int, unsigned long) --> void", pybind11::arg("LogoID"), pybind11::arg("bSwapColors"));
+		cl.def("HandleTeamNameSanitized", (void (TeamWrapper::*)(std::string, std::string)) &TeamWrapper::HandleTeamNameSanitized, "C++: TeamWrapper::HandleTeamNameSanitized(std::string, std::string) --> void", pybind11::arg("Original"), pybind11::arg("Sanitized"));
 		cl.def("SetClubID2", (void (TeamWrapper::*)(unsigned long long)) &TeamWrapper::SetClubID2, "C++: TeamWrapper::SetClubID2(unsigned long long) --> void", pybind11::arg("InClubID"));
+		cl.def("SetCustomTeamName", (void (TeamWrapper::*)(std::string)) &TeamWrapper::SetCustomTeamName, "C++: TeamWrapper::SetCustomTeamName(std::string) --> void", pybind11::arg("NewName"));
 		cl.def("SetDefaultColors", (void (TeamWrapper::*)()) &TeamWrapper::SetDefaultColors, "C++: TeamWrapper::SetDefaultColors() --> void");
 		cl.def("IsSingleParty", (bool (TeamWrapper::*)()) &TeamWrapper::IsSingleParty, "C++: TeamWrapper::IsSingleParty() --> bool");
+		cl.def("GetTeamMemberNamed", (class PriWrapper (TeamWrapper::*)(std::string)) &TeamWrapper::GetTeamMemberNamed, "C++: TeamWrapper::GetTeamMemberNamed(std::string) --> class PriWrapper", pybind11::arg("PlayerName"));
 		cl.def("GetNumBots", (int (TeamWrapper::*)()) &TeamWrapper::GetNumBots, "C++: TeamWrapper::GetNumBots() --> int");
 		cl.def("GetNumHumans", (int (TeamWrapper::*)()) &TeamWrapper::GetNumHumans, "C++: TeamWrapper::GetNumHumans() --> int");
 		cl.def("OnScoreUpdated", (void (TeamWrapper::*)()) &TeamWrapper::OnScoreUpdated, "C++: TeamWrapper::OnScoreUpdated() --> void");
