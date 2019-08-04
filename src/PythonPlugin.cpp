@@ -20,10 +20,6 @@ void PythonPlugin::onUnload()
 {
 }
 
-void PythonPlugin::onTick(std::string eventName)
-{
-	cvarManager->log("Goal!");
-}
 
 void PythonPlugin::ReloadModule(vector<string> params)
 {
