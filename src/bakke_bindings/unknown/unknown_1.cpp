@@ -179,6 +179,7 @@ void bind_unknown_unknown_1(py::module &M)
 		cl.def("GetTeamNum2", (unsigned char (ActorWrapper::*)()) &ActorWrapper::GetTeamNum2, "C++: ActorWrapper::GetTeamNum2() --> unsigned char");
 		cl.def("IsPlayerOwned", (bool (ActorWrapper::*)()) &ActorWrapper::IsPlayerOwned, "C++: ActorWrapper::IsPlayerOwned() --> bool");
 		cl.def("IsStationary", (bool (ActorWrapper::*)()) &ActorWrapper::IsStationary, "C++: ActorWrapper::IsStationary() --> bool");
+		cl.def("eventDebugMessagePlayer", (void (ActorWrapper::*)(std::string)) &ActorWrapper::eventDebugMessagePlayer, "C++: ActorWrapper::eventDebugMessagePlayer(std::string) --> void", pybind11::arg("msg"));
 		cl.def("GetGravityAcceleration", (struct Vector (ActorWrapper::*)()) &ActorWrapper::GetGravityAcceleration, "C++: ActorWrapper::GetGravityAcceleration() --> struct Vector");
 		cl.def("GetGravityDirection", (struct Vector (ActorWrapper::*)()) &ActorWrapper::GetGravityDirection, "C++: ActorWrapper::GetGravityDirection() --> struct Vector");
 		cl.def("GetGravityZ", (float (ActorWrapper::*)()) &ActorWrapper::GetGravityZ, "C++: ActorWrapper::GetGravityZ() --> float");
@@ -188,6 +189,8 @@ void bind_unknown_unknown_1(py::module &M)
 		cl.def("SetTickIsDisabled", (void (ActorWrapper::*)(unsigned long)) &ActorWrapper::SetTickIsDisabled, "C++: ActorWrapper::SetTickIsDisabled(unsigned long) --> void", pybind11::arg("bInDisabled"));
 		cl.def("SetPhysics2", (void (ActorWrapper::*)(unsigned char)) &ActorWrapper::SetPhysics2, "C++: ActorWrapper::SetPhysics2(unsigned char) --> void", pybind11::arg("newPhysics"));
 		cl.def("SetHidden2", (void (ActorWrapper::*)(unsigned long)) &ActorWrapper::SetHidden2, "C++: ActorWrapper::SetHidden2(unsigned long) --> void", pybind11::arg("bNewHidden"));
+		cl.def("ChartData", (void (ActorWrapper::*)(std::string, float)) &ActorWrapper::ChartData, "C++: ActorWrapper::ChartData(std::string, float) --> void", pybind11::arg("DataName"), pybind11::arg("DataValue"));
+		cl.def("DrawDebugString", (void (ActorWrapper::*)(struct Vector &, std::string, class ActorWrapper, struct UnrealColor &, float)) &ActorWrapper::DrawDebugString, "C++: ActorWrapper::DrawDebugString(struct Vector &, std::string, class ActorWrapper, struct UnrealColor &, float) --> void", pybind11::arg("TextLocation"), pybind11::arg("Text"), pybind11::arg("TestBaseActor"), pybind11::arg("TextColor"), pybind11::arg("Duration"));
 		cl.def("DrawDebugCone", (void (ActorWrapper::*)(struct Vector &, struct Vector &, float, float, float, int, struct UnrealColor &, unsigned long)) &ActorWrapper::DrawDebugCone, "C++: ActorWrapper::DrawDebugCone(struct Vector &, struct Vector &, float, float, float, int, struct UnrealColor &, unsigned long) --> void", pybind11::arg("Origin"), pybind11::arg("Direction"), pybind11::arg("Length"), pybind11::arg("AngleWidth"), pybind11::arg("AngleHeight"), pybind11::arg("NumSides"), pybind11::arg("DrawColor"), pybind11::arg("bPersistentLines"));
 		cl.def("GetAggregateBaseVelocity", (struct Vector (ActorWrapper::*)(class ActorWrapper)) &ActorWrapper::GetAggregateBaseVelocity, "C++: ActorWrapper::GetAggregateBaseVelocity(class ActorWrapper) --> struct Vector", pybind11::arg("TestBase"));
 		cl.def("IsOwnedBy", (bool (ActorWrapper::*)(class ActorWrapper)) &ActorWrapper::IsOwnedBy, "C++: ActorWrapper::IsOwnedBy(class ActorWrapper) --> bool", pybind11::arg("TestActor"));

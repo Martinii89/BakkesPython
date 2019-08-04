@@ -73,6 +73,7 @@ void bind_unknown_unknown_10(py::module &M)
 		cl.def("UpdateMaxTeamSize", (void (TeamGameEventWrapper::*)()) &TeamGameEventWrapper::UpdateMaxTeamSize, "C++: TeamGameEventWrapper::UpdateMaxTeamSize() --> void");
 		cl.def("SetUnfairTeams", (void (TeamGameEventWrapper::*)(unsigned long)) &TeamGameEventWrapper::SetUnfairTeams, "C++: TeamGameEventWrapper::SetUnfairTeams(unsigned long) --> void", pybind11::arg("bUnfair"));
 		cl.def("InitBotSkill", (void (TeamGameEventWrapper::*)()) &TeamGameEventWrapper::InitBotSkill, "C++: TeamGameEventWrapper::InitBotSkill() --> void");
+		cl.def("eventInitGame", (void (TeamGameEventWrapper::*)(std::string)) &TeamGameEventWrapper::eventInitGame, "C++: TeamGameEventWrapper::eventInitGame(std::string) --> void", pybind11::arg("Options"));
 	}
 	{ // ServerWrapper file: line:15
 		pybind11::class_<ServerWrapper, std::shared_ptr<ServerWrapper>, TeamGameEventWrapper> cl(M, "ServerWrapper");
@@ -83,6 +84,8 @@ void bind_unknown_unknown_10(py::module &M)
 		cl.def( pybind11::init( [](ServerWrapper const &o){ return new ServerWrapper(o); } ) );
 		cl.def("assign", (class ServerWrapper & (ServerWrapper::*)(class ServerWrapper)) &ServerWrapper::operator=, "C++: ServerWrapper::operator=(class ServerWrapper) --> class ServerWrapper &", pybind11::return_value_policy::automatic, pybind11::arg("rhs"));
 		cl.def("GetBall", (class BallWrapper (ServerWrapper::*)()) &ServerWrapper::GetBall, "C++: ServerWrapper::GetBall() --> class BallWrapper");
+		cl.def("SpawnCar", (void (ServerWrapper::*)(int, std::string)) &ServerWrapper::SpawnCar, "C++: ServerWrapper::SpawnCar(int, std::string) --> void", pybind11::arg("carBody"), pybind11::arg("name"));
+		cl.def("SpawnBot", (void (ServerWrapper::*)(int, std::string)) &ServerWrapper::SpawnBot, "C++: ServerWrapper::SpawnBot(int, std::string) --> void", pybind11::arg("carBody"), pybind11::arg("name"));
 		cl.def("SpawnBall", (class BallWrapper (ServerWrapper::*)(const struct Vector, bool, bool)) &ServerWrapper::SpawnBall, "C++: ServerWrapper::SpawnBall(const struct Vector, bool, bool) --> class BallWrapper", pybind11::arg("position"), pybind11::arg("wake"), pybind11::arg("spawnCannon"));
 		cl.def("HasAuthority", (bool (ServerWrapper::*)()) &ServerWrapper::HasAuthority, "C++: ServerWrapper::HasAuthority() --> bool");
 		cl.def("SetGameSpeed", (void (ServerWrapper::*)(float)) &ServerWrapper::SetGameSpeed, "C++: ServerWrapper::SetGameSpeed(float) --> void", pybind11::arg("GameSpeed"));
@@ -116,8 +119,6 @@ void bind_unknown_unknown_10(py::module &M)
 		cl.def("SetMaxScore", (void (ServerWrapper::*)(int)) &ServerWrapper::SetMaxScore, "C++: ServerWrapper::SetMaxScore(int) --> void", pybind11::arg("newMaxScore"));
 		cl.def("GetAutoBalanceDifference", (int (ServerWrapper::*)()) &ServerWrapper::GetAutoBalanceDifference, "C++: ServerWrapper::GetAutoBalanceDifference() --> int");
 		cl.def("SetAutoBalanceDifference", (void (ServerWrapper::*)(int)) &ServerWrapper::SetAutoBalanceDifference, "C++: ServerWrapper::SetAutoBalanceDifference(int) --> void", pybind11::arg("newAutoBalanceDifference"));
-		//cl.def("GetLastTrialTime", (int (ServerWrapper::*)()) &ServerWrapper::GetLastTrialTime, "C++: ServerWrapper::GetLastTrialTime() --> int");
-		//cl.def("SetLastTrialTime", (void (ServerWrapper::*)(int)) &ServerWrapper::SetLastTrialTime, "C++: ServerWrapper::SetLastTrialTime(int) --> void", pybind11::arg("newLastTrialTime"));
 		cl.def("GetScoreSlomoTime", (float (ServerWrapper::*)()) &ServerWrapper::GetScoreSlomoTime, "C++: ServerWrapper::GetScoreSlomoTime() --> float");
 		cl.def("SetScoreSlomoTime", (void (ServerWrapper::*)(float)) &ServerWrapper::SetScoreSlomoTime, "C++: ServerWrapper::SetScoreSlomoTime(float) --> void", pybind11::arg("newScoreSlomoTime"));
 		cl.def("GetGameTimeRemaining", (float (ServerWrapper::*)()) &ServerWrapper::GetGameTimeRemaining, "C++: ServerWrapper::GetGameTimeRemaining() --> float");
@@ -140,8 +141,6 @@ void bind_unknown_unknown_10(py::module &M)
 		cl.def("SetbOverTime", (void (ServerWrapper::*)(unsigned long)) &ServerWrapper::SetbOverTime, "C++: ServerWrapper::SetbOverTime(unsigned long) --> void", pybind11::arg("newbOverTime"));
 		cl.def("GetbUnlimitedTime", (unsigned long (ServerWrapper::*)()) &ServerWrapper::GetbUnlimitedTime, "C++: ServerWrapper::GetbUnlimitedTime() --> unsigned long");
 		cl.def("SetbUnlimitedTime", (void (ServerWrapper::*)(unsigned long)) &ServerWrapper::SetbUnlimitedTime, "C++: ServerWrapper::SetbUnlimitedTime(unsigned long) --> void", pybind11::arg("newbUnlimitedTime"));
-		//cl.def("GetbKickOnTrialEnd", (unsigned long (ServerWrapper::*)()) &ServerWrapper::GetbKickOnTrialEnd, "C++: ServerWrapper::GetbKickOnTrialEnd() --> unsigned long");
-		//cl.def("SetbKickOnTrialEnd", (void (ServerWrapper::*)(unsigned long)) &ServerWrapper::SetbKickOnTrialEnd, "C++: ServerWrapper::SetbKickOnTrialEnd(unsigned long) --> void", pybind11::arg("newbKickOnTrialEnd"));
 		cl.def("GetbNoContest", (unsigned long (ServerWrapper::*)()) &ServerWrapper::GetbNoContest, "C++: ServerWrapper::GetbNoContest() --> unsigned long");
 		cl.def("SetbNoContest", (void (ServerWrapper::*)(unsigned long)) &ServerWrapper::SetbNoContest, "C++: ServerWrapper::SetbNoContest(unsigned long) --> void", pybind11::arg("newbNoContest"));
 		cl.def("GetbDisableGoalDelay", (unsigned long (ServerWrapper::*)()) &ServerWrapper::GetbDisableGoalDelay, "C++: ServerWrapper::GetbDisableGoalDelay() --> unsigned long");
@@ -194,8 +193,6 @@ void bind_unknown_unknown_10(py::module &M)
 		cl.def("SetReplicatedServerPerformanceState", (void (ServerWrapper::*)(unsigned char)) &ServerWrapper::SetReplicatedServerPerformanceState, "C++: ServerWrapper::SetReplicatedServerPerformanceState(unsigned char) --> void", pybind11::arg("newReplicatedServerPerformanceState"));
 		cl.def("GetRoundNum", (int (ServerWrapper::*)()) &ServerWrapper::GetRoundNum, "C++: ServerWrapper::GetRoundNum() --> int");
 		cl.def("SetRoundNum", (void (ServerWrapper::*)(int)) &ServerWrapper::SetRoundNum, "C++: ServerWrapper::SetRoundNum(int) --> void", pybind11::arg("newRoundNum"));
-		//cl.def("GetKickIdleReplayOffset", (float (ServerWrapper::*)()) &ServerWrapper::GetKickIdleReplayOffset, "C++: ServerWrapper::GetKickIdleReplayOffset() --> float");
-		//cl.def("SetKickIdleReplayOffset", (void (ServerWrapper::*)(float)) &ServerWrapper::SetKickIdleReplayOffset, "C++: ServerWrapper::SetKickIdleReplayOffset(float) --> void", pybind11::arg("newKickIdleReplayOffset"));
 		cl.def("GetAssistMaxTime", (float (ServerWrapper::*)()) &ServerWrapper::GetAssistMaxTime, "C++: ServerWrapper::GetAssistMaxTime() --> float");
 		cl.def("SetAssistMaxTime", (void (ServerWrapper::*)(float)) &ServerWrapper::SetAssistMaxTime, "C++: ServerWrapper::SetAssistMaxTime(float) --> void", pybind11::arg("newAssistMaxTime"));
 		cl.def("GetBallHasBeenHitStartDelay", (float (ServerWrapper::*)()) &ServerWrapper::GetBallHasBeenHitStartDelay, "C++: ServerWrapper::GetBallHasBeenHitStartDelay() --> float");
@@ -234,10 +231,6 @@ void bind_unknown_unknown_10(py::module &M)
 		cl.def("UpdateTotalGameTimePlayed", (void (ServerWrapper::*)(float)) &ServerWrapper::UpdateTotalGameTimePlayed, "C++: ServerWrapper::UpdateTotalGameTimePlayed(float) --> void", pybind11::arg("DeltaTime"));
 		cl.def("UpdateGameTime", (void (ServerWrapper::*)(float)) &ServerWrapper::UpdateGameTime, "C++: ServerWrapper::UpdateGameTime(float) --> void", pybind11::arg("DeltaTime"));
 		cl.def("CanUpdateGameTime", (bool (ServerWrapper::*)()) &ServerWrapper::CanUpdateGameTime, "C++: ServerWrapper::CanUpdateGameTime() --> bool");
-		//cl.def("WaitForBallOnGround", (void (ServerWrapper::*)()) &ServerWrapper::WaitForBallOnGround, "C++: ServerWrapper::WaitForBallOnGround() --> void");
-		//cl.def("BallHitGround", (bool (ServerWrapper::*)(struct Vector &)) &ServerWrapper::BallHitGround, "C++: ServerWrapper::BallHitGround(struct Vector &) --> bool", pybind11::arg("HitNorm"));
-		//cl.def("HandleBallHitGround", (void (ServerWrapper::*)(class BallWrapper, struct Vector &, struct Vector &)) &ServerWrapper::HandleBallHitGround, "C++: ServerWrapper::HandleBallHitGround(class BallWrapper, struct Vector &, struct Vector &) --> void", pybind11::arg("Ball"), pybind11::arg("HitLoc"), pybind11::arg("HitNorm"));
-		//cl.def("HandleBallHitGroundTimeout", (void (ServerWrapper::*)()) &ServerWrapper::HandleBallHitGroundTimeout, "C++: ServerWrapper::HandleBallHitGroundTimeout() --> void");
 		cl.def("StartReplay", (void (ServerWrapper::*)()) &ServerWrapper::StartReplay, "C++: ServerWrapper::StartReplay() --> void");
 		cl.def("HandleReplayFinished", (void (ServerWrapper::*)(class ReplayDirectorWrapper)) &ServerWrapper::HandleReplayFinished, "C++: ServerWrapper::HandleReplayFinished(class ReplayDirectorWrapper) --> void", pybind11::arg("InReplay"));
 		cl.def("GotoPodiumSpotlight", (void (ServerWrapper::*)()) &ServerWrapper::GotoPodiumSpotlight, "C++: ServerWrapper::GotoPodiumSpotlight() --> void");
@@ -276,6 +269,7 @@ void bind_unknown_unknown_10(py::module &M)
 		cl.def("ShouldPlayReplay", (bool (ServerWrapper::*)()) &ServerWrapper::ShouldPlayReplay, "C++: ServerWrapper::ShouldPlayReplay() --> bool");
 		cl.def("ShouldRecordReplay", (bool (ServerWrapper::*)()) &ServerWrapper::ShouldRecordReplay, "C++: ServerWrapper::ShouldRecordReplay() --> bool");
 		cl.def("OnBallHasBeenHit", (void (ServerWrapper::*)()) &ServerWrapper::OnBallHasBeenHit, "C++: ServerWrapper::OnBallHasBeenHit() --> void");
+		cl.def("SpawnBall2", (class BallWrapper (ServerWrapper::*)(struct Vector &, unsigned long, unsigned long, std::string)) &ServerWrapper::SpawnBall2, "C++: ServerWrapper::SpawnBall2(struct Vector &, unsigned long, unsigned long, std::string) --> class BallWrapper", pybind11::arg("SpawnLoc"), pybind11::arg("bWake"), pybind11::arg("bSpawnCannon"), pybind11::arg("BallArch"));
 		cl.def("GetTotalScore", (int (ServerWrapper::*)()) &ServerWrapper::GetTotalScore, "C++: ServerWrapper::GetTotalScore() --> int");
 		cl.def("HandleCarSet", (void (ServerWrapper::*)(class PriWrapper)) &ServerWrapper::HandleCarSet, "C++: ServerWrapper::HandleCarSet(class PriWrapper) --> void", pybind11::arg("InPRI"));
 		cl.def("RemovePRI", (void (ServerWrapper::*)(class PriWrapper)) &ServerWrapper::RemovePRI, "C++: ServerWrapper::RemovePRI(class PriWrapper) --> void", pybind11::arg("PRI"));
@@ -331,6 +325,7 @@ void bind_unknown_unknown_10(py::module &M)
 		cl.def("OnClubMatch", (void (ServerWrapper::*)()) &ServerWrapper::OnClubMatch, "C++: ServerWrapper::OnClubMatch() --> void");
 		cl.def("CanInitClubMatch", (bool (ServerWrapper::*)()) &ServerWrapper::CanInitClubMatch, "C++: ServerWrapper::CanInitClubMatch() --> bool");
 		cl.def("AssignCustomTeamSettings", (void (ServerWrapper::*)()) &ServerWrapper::AssignCustomTeamSettings, "C++: ServerWrapper::AssignCustomTeamSettings() --> void");
+		cl.def("InitGame2", (void (ServerWrapper::*)(std::string)) &ServerWrapper::InitGame2, "C++: ServerWrapper::InitGame2(std::string) --> void", pybind11::arg("Options"));
 		cl.def("EventGameWinnerSet", (void (ServerWrapper::*)(class ServerWrapper)) &ServerWrapper::EventGameWinnerSet, "C++: ServerWrapper::EventGameWinnerSet(class ServerWrapper) --> void", pybind11::arg("GameEvent"));
 		cl.def("EventGoalScored", (void (ServerWrapper::*)(class ServerWrapper, class BallWrapper, class GoalWrapper, int, int)) &ServerWrapper::EventGoalScored, "C++: ServerWrapper::EventGoalScored(class ServerWrapper, class BallWrapper, class GoalWrapper, int, int) --> void", pybind11::arg("GameEvent"), pybind11::arg("Ball"), pybind11::arg("Goal"), pybind11::arg("ScoreIndex"), pybind11::arg("AssistIdx"));
 	}

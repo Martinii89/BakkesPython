@@ -1,61 +1,19 @@
 #include "pch.h"
 #include <bakkesmod/wrappers/GameObject/CarComponent/FlipCarComponentWrapper.h>
 #include <bakkesmod/wrappers/GameObject/CarComponent/PrimitiveComponentWrapper.h>
-#include <bakkesmod/wrappers/GameObject/RumbleComponent/GravityPickup.h>
-#include <bakkesmod/wrappers/GameObject/RumbleComponent/HandbrakeOverridePickup.h>
 #include <bakkesmod/wrappers/GameObject/RumbleComponent/HitForcePickup.h>
 #include <bakkesmod/wrappers/GameObject/RumbleComponent/SwapperPickup.h>
 #include <bakkesmod/wrappers/GameObject/RumbleComponent/TimeBombPickup.h>
 #include <bakkesmod/wrappers/GameObject/RumbleComponent/TornadoPickup.h>
+#include <bakkesmod/wrappers/GameObject/RumbleComponent/VelcroPickup.h>
 #include <bakkesmod/wrappers/arraywrapper.h>
 #include <memory>
 #include <sstream> // __str__
 #include <string>
 
 
-void bind_bakkesmod_wrappers_GameObject_RumbleComponent_GravityPickup(py::module &M)
+void bind_bakkesmod_wrappers_GameObject_RumbleComponent_HitForcePickup(py::module &M)
 {
-	{ // GravityPickup file:bakkesmod/wrappers/GameObject/RumbleComponent/GravityPickup.h line:9
-		pybind11::class_<GravityPickup, std::shared_ptr<GravityPickup>, RumblePickupComponentWrapper> cl(M, "GravityPickup");
-		pybind11::handle cl_type = cl;
-
-		cl.def( pybind11::init<unsigned long>(), pybind11::arg("mem") );
-
-		cl.def( pybind11::init( [](GravityPickup const &o){ return new GravityPickup(o); } ) );
-		cl.def("assign", (class GravityPickup & (GravityPickup::*)(class GravityPickup)) &GravityPickup::operator=, "C++: GravityPickup::operator=(class GravityPickup) --> class GravityPickup &", pybind11::return_value_policy::automatic, pybind11::arg("rhs"));
-		cl.def("GetBallGravity", (float (GravityPickup::*)()) &GravityPickup::GetBallGravity, "C++: GravityPickup::GetBallGravity() --> float");
-		cl.def("SetBallGravity", (void (GravityPickup::*)(float)) &GravityPickup::SetBallGravity, "C++: GravityPickup::SetBallGravity(float) --> void", pybind11::arg("newBallGravity"));
-		cl.def("GetRange", (float (GravityPickup::*)()) &GravityPickup::GetRange, "C++: GravityPickup::GetRange() --> float");
-		cl.def("SetRange", (void (GravityPickup::*)(float)) &GravityPickup::SetRange, "C++: GravityPickup::SetRange(float) --> void", pybind11::arg("newRange"));
-		cl.def("GetOffset", (struct Vector (GravityPickup::*)()) &GravityPickup::GetOffset, "C++: GravityPickup::GetOffset() --> struct Vector");
-		cl.def("SetOffset", (void (GravityPickup::*)(struct Vector)) &GravityPickup::SetOffset, "C++: GravityPickup::SetOffset(struct Vector) --> void", pybind11::arg("newOffset"));
-		cl.def("GetbDeactivateOnTouch", (unsigned long (GravityPickup::*)()) &GravityPickup::GetbDeactivateOnTouch, "C++: GravityPickup::GetbDeactivateOnTouch() --> unsigned long");
-		cl.def("SetbDeactivateOnTouch", (void (GravityPickup::*)(unsigned long)) &GravityPickup::SetbDeactivateOnTouch, "C++: GravityPickup::SetbDeactivateOnTouch(unsigned long) --> void", pybind11::arg("newbDeactivateOnTouch"));
-		cl.def("GetRecordBallHitRate", (float (GravityPickup::*)()) &GravityPickup::GetRecordBallHitRate, "C++: GravityPickup::GetRecordBallHitRate() --> float");
-		cl.def("SetRecordBallHitRate", (void (GravityPickup::*)(float)) &GravityPickup::SetRecordBallHitRate, "C++: GravityPickup::SetRecordBallHitRate(float) --> void", pybind11::arg("newRecordBallHitRate"));
-		cl.def("GetLastRecordedBallHitTime", (float (GravityPickup::*)()) &GravityPickup::GetLastRecordedBallHitTime, "C++: GravityPickup::GetLastRecordedBallHitTime() --> float");
-		cl.def("SetLastRecordedBallHitTime", (void (GravityPickup::*)(float)) &GravityPickup::SetLastRecordedBallHitTime, "C++: GravityPickup::SetLastRecordedBallHitTime(float) --> void", pybind11::arg("newLastRecordedBallHitTime"));
-		cl.def("GetPrevBall", (class BallWrapper (GravityPickup::*)()) &GravityPickup::GetPrevBall, "C++: GravityPickup::GetPrevBall() --> class BallWrapper");
-		cl.def("SetPrevBall", (void (GravityPickup::*)(class BallWrapper)) &GravityPickup::SetPrevBall, "C++: GravityPickup::SetPrevBall(class BallWrapper) --> void", pybind11::arg("newPrevBall"));
-		//cl.def("HandleHitBall", (void (GravityPickup::*)(class CarWrapper, class BallWrapper)) &GravityPickup::HandleHitBall, "C++: GravityPickup::HandleHitBall(class CarWrapper, class BallWrapper) --> void", pybind11::arg("InCar"), pybind11::arg("Ball"));
-		cl.def("UpdateVisual", (void (GravityPickup::*)()) &GravityPickup::UpdateVisual, "C++: GravityPickup::UpdateVisual() --> void");
-		cl.def("ApplyForces", (void (GravityPickup::*)(float)) &GravityPickup::ApplyForces, "C++: GravityPickup::ApplyForces(float) --> void", pybind11::arg("ActiveTime"));
-		cl.def("PickupEnd", (void (GravityPickup::*)()) &GravityPickup::PickupEnd, "C++: GravityPickup::PickupEnd() --> void");
-		cl.def("PickupStart", (void (GravityPickup::*)()) &GravityPickup::PickupStart, "C++: GravityPickup::PickupStart() --> void");
-	}
-	{ // HandbrakeOverridePickup file:bakkesmod/wrappers/GameObject/RumbleComponent/HandbrakeOverridePickup.h line:8
-		pybind11::class_<HandbrakeOverridePickup, std::shared_ptr<HandbrakeOverridePickup>, TargetedPickup> cl(M, "HandbrakeOverridePickup");
-		pybind11::handle cl_type = cl;
-
-		cl.def( pybind11::init<unsigned long>(), pybind11::arg("mem") );
-
-		cl.def( pybind11::init( [](HandbrakeOverridePickup const &o){ return new HandbrakeOverridePickup(o); } ) );
-		cl.def("assign", (class HandbrakeOverridePickup & (HandbrakeOverridePickup::*)(class HandbrakeOverridePickup)) &HandbrakeOverridePickup::operator=, "C++: HandbrakeOverridePickup::operator=(class HandbrakeOverridePickup) --> class HandbrakeOverridePickup &", pybind11::return_value_policy::automatic, pybind11::arg("rhs"));
-		cl.def("GetOtherCar", (class CarWrapper (HandbrakeOverridePickup::*)()) &HandbrakeOverridePickup::GetOtherCar, "C++: HandbrakeOverridePickup::GetOtherCar() --> class CarWrapper");
-		cl.def("SetOtherCar", (void (HandbrakeOverridePickup::*)(class CarWrapper)) &HandbrakeOverridePickup::SetOtherCar, "C++: HandbrakeOverridePickup::SetOtherCar(class CarWrapper) --> void", pybind11::arg("newOtherCar"));
-		cl.def("PickupEnd", (void (HandbrakeOverridePickup::*)()) &HandbrakeOverridePickup::PickupEnd, "C++: HandbrakeOverridePickup::PickupEnd() --> void");
-		cl.def("PickupStart", (void (HandbrakeOverridePickup::*)()) &HandbrakeOverridePickup::PickupStart, "C++: HandbrakeOverridePickup::PickupStart() --> void");
-	}
 	{ // HitForcePickup file:bakkesmod/wrappers/GameObject/RumbleComponent/HitForcePickup.h line:8
 		pybind11::class_<HitForcePickup, std::shared_ptr<HitForcePickup>, RumblePickupComponentWrapper> cl(M, "HitForcePickup");
 		pybind11::handle cl_type = cl;
@@ -169,5 +127,47 @@ void bind_bakkesmod_wrappers_GameObject_RumbleComponent_GravityPickup(py::module
 		cl.def("ApplyForces", (void (TornadoPickup::*)(float)) &TornadoPickup::ApplyForces, "C++: TornadoPickup::ApplyForces(float) --> void", pybind11::arg("ActiveTime"));
 		cl.def("PlayCarSFX", (void (TornadoPickup::*)(class RBActorWrapper)) &TornadoPickup::PlayCarSFX, "C++: TornadoPickup::PlayCarSFX(class RBActorWrapper) --> void", pybind11::arg("InActor"));
 		cl.def("PlayBallSFX", (void (TornadoPickup::*)(class RBActorWrapper)) &TornadoPickup::PlayBallSFX, "C++: TornadoPickup::PlayBallSFX(class RBActorWrapper) --> void", pybind11::arg("InActor"));
+	}
+	{ // VelcroPickup file:bakkesmod/wrappers/GameObject/RumbleComponent/VelcroPickup.h line:10
+		pybind11::class_<VelcroPickup, std::shared_ptr<VelcroPickup>, RumblePickupComponentWrapper> cl(M, "VelcroPickup");
+		pybind11::handle cl_type = cl;
+
+		cl.def( pybind11::init<unsigned long>(), pybind11::arg("mem") );
+
+		cl.def( pybind11::init( [](VelcroPickup const &o){ return new VelcroPickup(o); } ) );
+		cl.def("assign", (class VelcroPickup & (VelcroPickup::*)(class VelcroPickup)) &VelcroPickup::operator=, "C++: VelcroPickup::operator=(class VelcroPickup) --> class VelcroPickup &", pybind11::return_value_policy::automatic, pybind11::arg("rhs"));
+		cl.def("GetBallOffset", (struct Vector (VelcroPickup::*)()) &VelcroPickup::GetBallOffset, "C++: VelcroPickup::GetBallOffset() --> struct Vector");
+		cl.def("SetBallOffset", (void (VelcroPickup::*)(struct Vector)) &VelcroPickup::SetBallOffset, "C++: VelcroPickup::SetBallOffset(struct Vector) --> void", pybind11::arg("newBallOffset"));
+		cl.def("GetbUseRealOffset", (unsigned long (VelcroPickup::*)()) &VelcroPickup::GetbUseRealOffset, "C++: VelcroPickup::GetbUseRealOffset() --> unsigned long");
+		cl.def("SetbUseRealOffset", (void (VelcroPickup::*)(unsigned long)) &VelcroPickup::SetbUseRealOffset, "C++: VelcroPickup::SetbUseRealOffset(unsigned long) --> void", pybind11::arg("newbUseRealOffset"));
+		cl.def("GetbHit", (unsigned long (VelcroPickup::*)()) &VelcroPickup::GetbHit, "C++: VelcroPickup::GetbHit() --> unsigned long");
+		cl.def("SetbHit", (void (VelcroPickup::*)(unsigned long)) &VelcroPickup::SetbHit, "C++: VelcroPickup::SetbHit(unsigned long) --> void", pybind11::arg("newbHit"));
+		cl.def("GetbBroken", (unsigned long (VelcroPickup::*)()) &VelcroPickup::GetbBroken, "C++: VelcroPickup::GetbBroken() --> unsigned long");
+		cl.def("SetbBroken", (void (VelcroPickup::*)(unsigned long)) &VelcroPickup::SetbBroken, "C++: VelcroPickup::SetbBroken(unsigned long) --> void", pybind11::arg("newbBroken"));
+		cl.def("GetAfterHitDuration", (float (VelcroPickup::*)()) &VelcroPickup::GetAfterHitDuration, "C++: VelcroPickup::GetAfterHitDuration() --> float");
+		cl.def("SetAfterHitDuration", (void (VelcroPickup::*)(float)) &VelcroPickup::SetAfterHitDuration, "C++: VelcroPickup::SetAfterHitDuration(float) --> void", pybind11::arg("newAfterHitDuration"));
+		cl.def("GetPostBreakDuration", (float (VelcroPickup::*)()) &VelcroPickup::GetPostBreakDuration, "C++: VelcroPickup::GetPostBreakDuration() --> float");
+		cl.def("SetPostBreakDuration", (void (VelcroPickup::*)(float)) &VelcroPickup::SetPostBreakDuration, "C++: VelcroPickup::SetPostBreakDuration(float) --> void", pybind11::arg("newPostBreakDuration"));
+		cl.def("GetMinBreakForce", (float (VelcroPickup::*)()) &VelcroPickup::GetMinBreakForce, "C++: VelcroPickup::GetMinBreakForce() --> float");
+		cl.def("SetMinBreakForce", (void (VelcroPickup::*)(float)) &VelcroPickup::SetMinBreakForce, "C++: VelcroPickup::SetMinBreakForce(float) --> void", pybind11::arg("newMinBreakForce"));
+		cl.def("GetMinBreakTime", (float (VelcroPickup::*)()) &VelcroPickup::GetMinBreakTime, "C++: VelcroPickup::GetMinBreakTime() --> float");
+		cl.def("SetMinBreakTime", (void (VelcroPickup::*)(float)) &VelcroPickup::SetMinBreakTime, "C++: VelcroPickup::SetMinBreakTime(float) --> void", pybind11::arg("newMinBreakTime"));
+		cl.def("GetCheckLastTouchRate", (float (VelcroPickup::*)()) &VelcroPickup::GetCheckLastTouchRate, "C++: VelcroPickup::GetCheckLastTouchRate() --> float");
+		cl.def("SetCheckLastTouchRate", (void (VelcroPickup::*)(float)) &VelcroPickup::SetCheckLastTouchRate, "C++: VelcroPickup::SetCheckLastTouchRate(float) --> void", pybind11::arg("newCheckLastTouchRate"));
+		cl.def("GetWeldedBall", (class BallWrapper (VelcroPickup::*)()) &VelcroPickup::GetWeldedBall, "C++: VelcroPickup::GetWeldedBall() --> class BallWrapper");
+		cl.def("SetWeldedBall", (void (VelcroPickup::*)(class BallWrapper)) &VelcroPickup::SetWeldedBall, "C++: VelcroPickup::SetWeldedBall(class BallWrapper) --> void", pybind11::arg("newWeldedBall"));
+		cl.def("GetOldBallMass", (float (VelcroPickup::*)()) &VelcroPickup::GetOldBallMass, "C++: VelcroPickup::GetOldBallMass() --> float");
+		cl.def("SetOldBallMass", (void (VelcroPickup::*)(float)) &VelcroPickup::SetOldBallMass, "C++: VelcroPickup::SetOldBallMass(float) --> void", pybind11::arg("newOldBallMass"));
+		cl.def("GetAttachTime", (float (VelcroPickup::*)()) &VelcroPickup::GetAttachTime, "C++: VelcroPickup::GetAttachTime() --> float");
+		cl.def("SetAttachTime", (void (VelcroPickup::*)(float)) &VelcroPickup::SetAttachTime, "C++: VelcroPickup::SetAttachTime(float) --> void", pybind11::arg("newAttachTime"));
+		cl.def("GetLastTouchCheckTime", (float (VelcroPickup::*)()) &VelcroPickup::GetLastTouchCheckTime, "C++: VelcroPickup::GetLastTouchCheckTime() --> float");
+		cl.def("SetLastTouchCheckTime", (void (VelcroPickup::*)(float)) &VelcroPickup::SetLastTouchCheckTime, "C++: VelcroPickup::SetLastTouchCheckTime(float) --> void", pybind11::arg("newLastTouchCheckTime"));
+		cl.def("GetBreakTime", (float (VelcroPickup::*)()) &VelcroPickup::GetBreakTime, "C++: VelcroPickup::GetBreakTime() --> float");
+		cl.def("SetBreakTime", (void (VelcroPickup::*)(float)) &VelcroPickup::SetBreakTime, "C++: VelcroPickup::SetBreakTime(float) --> void", pybind11::arg("newBreakTime"));
+		cl.def("DoBreak", (void (VelcroPickup::*)()) &VelcroPickup::DoBreak, "C++: VelcroPickup::DoBreak() --> void");
+		cl.def("HandleCarTouch", (void (VelcroPickup::*)(class BallWrapper, class CarWrapper, unsigned char)) &VelcroPickup::HandleCarTouch, "C++: VelcroPickup::HandleCarTouch(class BallWrapper, class CarWrapper, unsigned char) --> void", pybind11::arg("InBall"), pybind11::arg("InCar"), pybind11::arg("HitType"));
+		cl.def("PickupEnd", (void (VelcroPickup::*)()) &VelcroPickup::PickupEnd, "C++: VelcroPickup::PickupEnd() --> void");
+		cl.def("OnBallHit", (void (VelcroPickup::*)()) &VelcroPickup::OnBallHit, "C++: VelcroPickup::OnBallHit() --> void");
+		cl.def("PickupStart", (void (VelcroPickup::*)()) &VelcroPickup::PickupStart, "C++: VelcroPickup::PickupStart() --> void");
 	}
 }

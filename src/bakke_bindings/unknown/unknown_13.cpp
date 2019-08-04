@@ -1,8 +1,9 @@
 #include "pch.h"
+#include <bakkesmod/wrappers/Engine/UnrealStringWrapper.h>
+#include <bakkesmod/wrappers/GameObject/CarComponent/BoostWrapper.h>
 #include <bakkesmod/wrappers/GameObject/CarComponent/FlipCarComponentWrapper.h>
 #include <bakkesmod/wrappers/GameObject/CarComponent/PrimitiveComponentWrapper.h>
-#include <bakkesmod/wrappers/GameObject/RumbleComponent/BallCarSpringPickup.h>
-#include <bakkesmod/wrappers/GameObject/RumbleComponent/BallFreezePickup.h>
+#include <bakkesmod/wrappers/GameObject/RumbleComponent/AttachmentPickup.h>
 #include <bakkesmod/wrappers/arraywrapper.h>
 #include <memory>
 #include <sstream> // __str__
@@ -11,6 +12,83 @@
 
 void bind_unknown_unknown_13(py::module &M)
 {
+	{ // RumblePickupComponentWrapper file: line:12
+		pybind11::class_<RumblePickupComponentWrapper, std::shared_ptr<RumblePickupComponentWrapper>, CarComponentWrapper> cl(M, "RumblePickupComponentWrapper");
+		pybind11::handle cl_type = cl;
+
+		cl.def( pybind11::init<unsigned long>(), pybind11::arg("mem") );
+
+		cl.def( pybind11::init( [](RumblePickupComponentWrapper const &o){ return new RumblePickupComponentWrapper(o); } ) );
+		cl.def("assign", (class RumblePickupComponentWrapper & (RumblePickupComponentWrapper::*)(class RumblePickupComponentWrapper)) &RumblePickupComponentWrapper::operator=, "C++: RumblePickupComponentWrapper::operator=(class RumblePickupComponentWrapper) --> class RumblePickupComponentWrapper &", pybind11::return_value_policy::automatic, pybind11::arg("rhs"));
+		cl.def("GetPickupName", (class UnrealStringWrapper (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::GetPickupName, "C++: RumblePickupComponentWrapper::GetPickupName() --> class UnrealStringWrapper");
+		cl.def("GetbHudIgnoreUseTime", (unsigned long (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::GetbHudIgnoreUseTime, "C++: RumblePickupComponentWrapper::GetbHudIgnoreUseTime() --> unsigned long");
+		cl.def("SetbHudIgnoreUseTime", (void (RumblePickupComponentWrapper::*)(unsigned long)) &RumblePickupComponentWrapper::SetbHudIgnoreUseTime, "C++: RumblePickupComponentWrapper::SetbHudIgnoreUseTime(unsigned long) --> void", pybind11::arg("newbHudIgnoreUseTime"));
+		cl.def("GetbHasActivated", (unsigned long (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::GetbHasActivated, "C++: RumblePickupComponentWrapper::GetbHasActivated() --> unsigned long");
+		cl.def("SetbHasActivated", (void (RumblePickupComponentWrapper::*)(unsigned long)) &RumblePickupComponentWrapper::SetbHasActivated, "C++: RumblePickupComponentWrapper::SetbHasActivated(unsigned long) --> void", pybind11::arg("newbHasActivated"));
+		cl.def("GetbIsActive", (unsigned long (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::GetbIsActive, "C++: RumblePickupComponentWrapper::GetbIsActive() --> unsigned long");
+		cl.def("SetbIsActive", (void (RumblePickupComponentWrapper::*)(unsigned long)) &RumblePickupComponentWrapper::SetbIsActive, "C++: RumblePickupComponentWrapper::SetbIsActive(unsigned long) --> void", pybind11::arg("newbIsActive"));
+		cl.def("GetActivationDuration", (float (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::GetActivationDuration, "C++: RumblePickupComponentWrapper::GetActivationDuration() --> float");
+		cl.def("SetActivationDuration", (void (RumblePickupComponentWrapper::*)(float)) &RumblePickupComponentWrapper::SetActivationDuration, "C++: RumblePickupComponentWrapper::SetActivationDuration(float) --> void", pybind11::arg("newActivationDuration"));
+		cl.def("HasActivated2", (bool (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::HasActivated2, "C++: RumblePickupComponentWrapper::HasActivated2() --> bool");
+		cl.def("GetClientTarget", (class RBActorWrapper (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::GetClientTarget, "C++: RumblePickupComponentWrapper::GetClientTarget() --> class RBActorWrapper");
+		cl.def("OnVehicleSetupComplete", (void (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::OnVehicleSetupComplete, "C++: RumblePickupComponentWrapper::OnVehicleSetupComplete() --> void");
+		cl.def("GetActiveTimePercent", (float (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::GetActiveTimePercent, "C++: RumblePickupComponentWrapper::GetActiveTimePercent() --> float");
+		cl.def("PickupEnd", (void (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::PickupEnd, "C++: RumblePickupComponentWrapper::PickupEnd() --> void");
+		cl.def("PickupStart", (void (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::PickupStart, "C++: RumblePickupComponentWrapper::PickupStart() --> void");
+		cl.def("GetBoostComponent", (class BoostWrapper (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::GetBoostComponent, "C++: RumblePickupComponentWrapper::GetBoostComponent() --> class BoostWrapper");
+		cl.def("DeactivatePickup", (void (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::DeactivatePickup, "C++: RumblePickupComponentWrapper::DeactivatePickup() --> void");
+		cl.def("TryActivate", (bool (RumblePickupComponentWrapper::*)(class RBActorWrapper)) &RumblePickupComponentWrapper::TryActivate, "C++: RumblePickupComponentWrapper::TryActivate(class RBActorWrapper) --> bool", pybind11::arg("TargetOverride"));
+		cl.def("OnCreated", (void (RumblePickupComponentWrapper::*)()) &RumblePickupComponentWrapper::OnCreated, "C++: RumblePickupComponentWrapper::OnCreated() --> void");
+		cl.def("CanPickup", (bool (RumblePickupComponentWrapper::*)(class CarWrapper)) &RumblePickupComponentWrapper::CanPickup, "C++: RumblePickupComponentWrapper::CanPickup(class CarWrapper) --> bool", pybind11::arg("InCar"));
+		cl.def("ApplyPickup", (void (RumblePickupComponentWrapper::*)(class CarWrapper)) &RumblePickupComponentWrapper::ApplyPickup, "C++: RumblePickupComponentWrapper::ApplyPickup(class CarWrapper) --> void", pybind11::arg("InCar"));
+	}
+	{ // AttachmentPickup file:bakkesmod/wrappers/GameObject/RumbleComponent/AttachmentPickup.h line:7
+		pybind11::class_<AttachmentPickup, std::shared_ptr<AttachmentPickup>, RumblePickupComponentWrapper> cl(M, "AttachmentPickup");
+		pybind11::handle cl_type = cl;
+
+		cl.def( pybind11::init<unsigned long>(), pybind11::arg("mem") );
+
+		cl.def( pybind11::init( [](AttachmentPickup const &o){ return new AttachmentPickup(o); } ) );
+		cl.def("assign", (class AttachmentPickup & (AttachmentPickup::*)(class AttachmentPickup)) &AttachmentPickup::operator=, "C++: AttachmentPickup::operator=(class AttachmentPickup) --> class AttachmentPickup &", pybind11::return_value_policy::automatic, pybind11::arg("rhs"));
+		cl.def("PickupEnd", (void (AttachmentPickup::*)()) &AttachmentPickup::PickupEnd, "C++: AttachmentPickup::PickupEnd() --> void");
+		cl.def("PickupStart", (void (AttachmentPickup::*)()) &AttachmentPickup::PickupStart, "C++: AttachmentPickup::PickupStart() --> void");
+	}
+	{ // TargetedPickup file: line:9
+		pybind11::class_<TargetedPickup, std::shared_ptr<TargetedPickup>, RumblePickupComponentWrapper> cl(M, "TargetedPickup");
+		pybind11::handle cl_type = cl;
+
+		cl.def( pybind11::init<unsigned long>(), pybind11::arg("mem") );
+
+		cl.def( pybind11::init( [](TargetedPickup const &o){ return new TargetedPickup(o); } ) );
+		cl.def("assign", (class TargetedPickup & (TargetedPickup::*)(class TargetedPickup)) &TargetedPickup::operator=, "C++: TargetedPickup::operator=(class TargetedPickup) --> class TargetedPickup &", pybind11::return_value_policy::automatic, pybind11::arg("rhs"));
+		cl.def("GetbCanTargetBall", (unsigned long (TargetedPickup::*)()) &TargetedPickup::GetbCanTargetBall, "C++: TargetedPickup::GetbCanTargetBall() --> unsigned long");
+		cl.def("SetbCanTargetBall", (void (TargetedPickup::*)(unsigned long)) &TargetedPickup::SetbCanTargetBall, "C++: TargetedPickup::SetbCanTargetBall(unsigned long) --> void", pybind11::arg("newbCanTargetBall"));
+		cl.def("GetbCanTargetCars", (unsigned long (TargetedPickup::*)()) &TargetedPickup::GetbCanTargetCars, "C++: TargetedPickup::GetbCanTargetCars() --> unsigned long");
+		cl.def("SetbCanTargetCars", (void (TargetedPickup::*)(unsigned long)) &TargetedPickup::SetbCanTargetCars, "C++: TargetedPickup::SetbCanTargetCars(unsigned long) --> void", pybind11::arg("newbCanTargetCars"));
+		cl.def("GetbCanTargetEnemyCars", (unsigned long (TargetedPickup::*)()) &TargetedPickup::GetbCanTargetEnemyCars, "C++: TargetedPickup::GetbCanTargetEnemyCars() --> unsigned long");
+		cl.def("SetbCanTargetEnemyCars", (void (TargetedPickup::*)(unsigned long)) &TargetedPickup::SetbCanTargetEnemyCars, "C++: TargetedPickup::SetbCanTargetEnemyCars(unsigned long) --> void", pybind11::arg("newbCanTargetEnemyCars"));
+		cl.def("GetbCanTargetTeamCars", (unsigned long (TargetedPickup::*)()) &TargetedPickup::GetbCanTargetTeamCars, "C++: TargetedPickup::GetbCanTargetTeamCars() --> unsigned long");
+		cl.def("SetbCanTargetTeamCars", (void (TargetedPickup::*)(unsigned long)) &TargetedPickup::SetbCanTargetTeamCars, "C++: TargetedPickup::SetbCanTargetTeamCars(unsigned long) --> void", pybind11::arg("newbCanTargetTeamCars"));
+		cl.def("GetbUseDirectionalTargeting", (unsigned long (TargetedPickup::*)()) &TargetedPickup::GetbUseDirectionalTargeting, "C++: TargetedPickup::GetbUseDirectionalTargeting() --> unsigned long");
+		cl.def("SetbUseDirectionalTargeting", (void (TargetedPickup::*)(unsigned long)) &TargetedPickup::SetbUseDirectionalTargeting, "C++: TargetedPickup::SetbUseDirectionalTargeting(unsigned long) --> void", pybind11::arg("newbUseDirectionalTargeting"));
+		cl.def("GetbRequireTrace", (unsigned long (TargetedPickup::*)()) &TargetedPickup::GetbRequireTrace, "C++: TargetedPickup::GetbRequireTrace() --> unsigned long");
+		cl.def("SetbRequireTrace", (void (TargetedPickup::*)(unsigned long)) &TargetedPickup::SetbRequireTrace, "C++: TargetedPickup::SetbRequireTrace(unsigned long) --> void", pybind11::arg("newbRequireTrace"));
+		cl.def("GetRange", (float (TargetedPickup::*)()) &TargetedPickup::GetRange, "C++: TargetedPickup::GetRange() --> float");
+		cl.def("SetRange", (void (TargetedPickup::*)(float)) &TargetedPickup::SetRange, "C++: TargetedPickup::SetRange(float) --> void", pybind11::arg("newRange"));
+		cl.def("GetDirectionalTargetingAccuracy", (float (TargetedPickup::*)()) &TargetedPickup::GetDirectionalTargetingAccuracy, "C++: TargetedPickup::GetDirectionalTargetingAccuracy() --> float");
+		cl.def("SetDirectionalTargetingAccuracy", (void (TargetedPickup::*)(float)) &TargetedPickup::SetDirectionalTargetingAccuracy, "C++: TargetedPickup::SetDirectionalTargetingAccuracy(float) --> void", pybind11::arg("newDirectionalTargetingAccuracy"));
+		cl.def("GetClientTarget", (class RBActorWrapper (TargetedPickup::*)()) &TargetedPickup::GetClientTarget, "C++: TargetedPickup::GetClientTarget() --> class RBActorWrapper");
+		cl.def("SetClientTarget", (void (TargetedPickup::*)(class RBActorWrapper)) &TargetedPickup::SetClientTarget, "C++: TargetedPickup::SetClientTarget(class RBActorWrapper) --> void", pybind11::arg("newClientTarget"));
+		cl.def("GetTargeted", (class RBActorWrapper (TargetedPickup::*)()) &TargetedPickup::GetTargeted, "C++: TargetedPickup::GetTargeted() --> class RBActorWrapper");
+		cl.def("SetTargeted", (void (TargetedPickup::*)(class RBActorWrapper)) &TargetedPickup::SetTargeted, "C++: TargetedPickup::SetTargeted(class RBActorWrapper) --> void", pybind11::arg("newTargeted"));
+		cl.def("GetClientTarget2", (class RBActorWrapper (TargetedPickup::*)()) &TargetedPickup::GetClientTarget2, "C++: TargetedPickup::GetClientTarget2() --> class RBActorWrapper");
+		cl.def("TargetChanged", (void (TargetedPickup::*)()) &TargetedPickup::TargetChanged, "C++: TargetedPickup::TargetChanged() --> void");
+		cl.def("OnTargetChanged", (void (TargetedPickup::*)()) &TargetedPickup::OnTargetChanged, "C++: TargetedPickup::OnTargetChanged() --> void");
+		cl.def("TryActivate", (bool (TargetedPickup::*)(class RBActorWrapper)) &TargetedPickup::TryActivate, "C++: TargetedPickup::TryActivate(class RBActorWrapper) --> bool", pybind11::arg("TargetOverride"));
+		cl.def("ValidateTargetTrace", (bool (TargetedPickup::*)(class RBActorWrapper)) &TargetedPickup::ValidateTargetTrace, "C++: TargetedPickup::ValidateTargetTrace(class RBActorWrapper) --> bool", pybind11::arg("InTarget"));
+		cl.def("ValidateTarget2", (bool (TargetedPickup::*)(class RBActorWrapper)) &TargetedPickup::ValidateTarget2, "C++: TargetedPickup::ValidateTarget2(class RBActorWrapper) --> bool", pybind11::arg("InTarget"));
+		cl.def("GetTarget2", (class RBActorWrapper (TargetedPickup::*)()) &TargetedPickup::GetTarget2, "C++: TargetedPickup::GetTarget2() --> class RBActorWrapper");
+	}
 	{ // SpringPickup file: line:9
 		pybind11::class_<SpringPickup, std::shared_ptr<SpringPickup>, TargetedPickup> cl(M, "SpringPickup");
 		pybind11::handle cl_type = cl;
@@ -95,48 +173,5 @@ void bind_unknown_unknown_13(py::module &M)
 		cl.def("GetRelativeImpulse", (struct Vector (SpringPickup::*)(struct Vector &)) &SpringPickup::GetRelativeImpulse, "C++: SpringPickup::GetRelativeImpulse(struct Vector &) --> struct Vector", pybind11::arg("Direction"));
 		cl.def("DoSpring", (void (SpringPickup::*)(unsigned long)) &SpringPickup::DoSpring, "C++: SpringPickup::DoSpring(unsigned long) --> void", pybind11::arg("bFirstHit"));
 		cl.def("PickupStart", (void (SpringPickup::*)()) &SpringPickup::PickupStart, "C++: SpringPickup::PickupStart() --> void");
-	}
-	{ // BallCarSpringPickup file:bakkesmod/wrappers/GameObject/RumbleComponent/BallCarSpringPickup.h line:7
-		pybind11::class_<BallCarSpringPickup, std::shared_ptr<BallCarSpringPickup>, SpringPickup> cl(M, "BallCarSpringPickup");
-		pybind11::handle cl_type = cl;
-
-		cl.def( pybind11::init<unsigned long>(), pybind11::arg("mem") );
-
-		cl.def( pybind11::init( [](BallCarSpringPickup const &o){ return new BallCarSpringPickup(o); } ) );
-		cl.def("assign", (class BallCarSpringPickup & (BallCarSpringPickup::*)(class BallCarSpringPickup)) &BallCarSpringPickup::operator=, "C++: BallCarSpringPickup::operator=(class BallCarSpringPickup) --> class BallCarSpringPickup &", pybind11::return_value_policy::automatic, pybind11::arg("rhs"));
-		cl.def("ScaleSpringMeshToLocation", (void (BallCarSpringPickup::*)(struct Vector &, struct Vector &)) &BallCarSpringPickup::ScaleSpringMeshToLocation, "C++: BallCarSpringPickup::ScaleSpringMeshToLocation(struct Vector &, struct Vector &) --> void", pybind11::arg("NewLocation"), pybind11::arg("TargetLocation"));
-	}
-	{ // BallFreezePickup file:bakkesmod/wrappers/GameObject/RumbleComponent/BallFreezePickup.h line:9
-		pybind11::class_<BallFreezePickup, std::shared_ptr<BallFreezePickup>, TargetedPickup> cl(M, "BallFreezePickup");
-		pybind11::handle cl_type = cl;
-
-		cl.def( pybind11::init<unsigned long>(), pybind11::arg("mem") );
-
-		cl.def( pybind11::init( [](BallFreezePickup const &o){ return new BallFreezePickup(o); } ) );
-		cl.def("assign", (class BallFreezePickup & (BallFreezePickup::*)(class BallFreezePickup)) &BallFreezePickup::operator=, "C++: BallFreezePickup::operator=(class BallFreezePickup) --> class BallFreezePickup &", pybind11::return_value_policy::automatic, pybind11::arg("rhs"));
-		cl.def("GetbMaintainMomentum", (unsigned long (BallFreezePickup::*)()) &BallFreezePickup::GetbMaintainMomentum, "C++: BallFreezePickup::GetbMaintainMomentum() --> unsigned long");
-		cl.def("SetbMaintainMomentum", (void (BallFreezePickup::*)(unsigned long)) &BallFreezePickup::SetbMaintainMomentum, "C++: BallFreezePickup::SetbMaintainMomentum(unsigned long) --> void", pybind11::arg("newbMaintainMomentum"));
-		cl.def("GetbTouched", (unsigned long (BallFreezePickup::*)()) &BallFreezePickup::GetbTouched, "C++: BallFreezePickup::GetbTouched() --> unsigned long");
-		cl.def("SetbTouched", (void (BallFreezePickup::*)(unsigned long)) &BallFreezePickup::SetbTouched, "C++: BallFreezePickup::SetbTouched(unsigned long) --> void", pybind11::arg("newbTouched"));
-		cl.def("GetTimeToStop", (float (BallFreezePickup::*)()) &BallFreezePickup::GetTimeToStop, "C++: BallFreezePickup::GetTimeToStop() --> float");
-		cl.def("SetTimeToStop", (void (BallFreezePickup::*)(float)) &BallFreezePickup::SetTimeToStop, "C++: BallFreezePickup::SetTimeToStop(float) --> void", pybind11::arg("newTimeToStop"));
-		cl.def("GetStopMomentumPercentage", (float (BallFreezePickup::*)()) &BallFreezePickup::GetStopMomentumPercentage, "C++: BallFreezePickup::GetStopMomentumPercentage() --> float");
-		cl.def("SetStopMomentumPercentage", (void (BallFreezePickup::*)(float)) &BallFreezePickup::SetStopMomentumPercentage, "C++: BallFreezePickup::SetStopMomentumPercentage(float) --> void", pybind11::arg("newStopMomentumPercentage"));
-		cl.def("GetBall", (class BallWrapper (BallFreezePickup::*)()) &BallFreezePickup::GetBall, "C++: BallFreezePickup::GetBall() --> class BallWrapper");
-		cl.def("SetBall", (void (BallFreezePickup::*)(class BallWrapper)) &BallFreezePickup::SetBall, "C++: BallFreezePickup::SetBall(class BallWrapper) --> void", pybind11::arg("newBall"));
-		cl.def("GetOrigLinearVelocity", (struct Vector (BallFreezePickup::*)()) &BallFreezePickup::GetOrigLinearVelocity, "C++: BallFreezePickup::GetOrigLinearVelocity() --> struct Vector");
-		cl.def("SetOrigLinearVelocity", (void (BallFreezePickup::*)(struct Vector)) &BallFreezePickup::SetOrigLinearVelocity, "C++: BallFreezePickup::SetOrigLinearVelocity(struct Vector) --> void", pybind11::arg("newOrigLinearVelocity"));
-		cl.def("GetOrigAngularVelocity", (struct Vector (BallFreezePickup::*)()) &BallFreezePickup::GetOrigAngularVelocity, "C++: BallFreezePickup::GetOrigAngularVelocity() --> struct Vector");
-		cl.def("SetOrigAngularVelocity", (void (BallFreezePickup::*)(struct Vector)) &BallFreezePickup::SetOrigAngularVelocity, "C++: BallFreezePickup::SetOrigAngularVelocity(struct Vector) --> void", pybind11::arg("newOrigAngularVelocity"));
-		cl.def("GetOrigSpeed", (float (BallFreezePickup::*)()) &BallFreezePickup::GetOrigSpeed, "C++: BallFreezePickup::GetOrigSpeed() --> float");
-		cl.def("SetOrigSpeed", (void (BallFreezePickup::*)(float)) &BallFreezePickup::SetOrigSpeed, "C++: BallFreezePickup::SetOrigSpeed(float) --> void", pybind11::arg("newOrigSpeed"));
-		cl.def("GetRepOrigSpeed", (float (BallFreezePickup::*)()) &BallFreezePickup::GetRepOrigSpeed, "C++: BallFreezePickup::GetRepOrigSpeed() --> float");
-		cl.def("SetRepOrigSpeed", (void (BallFreezePickup::*)(float)) &BallFreezePickup::SetRepOrigSpeed, "C++: BallFreezePickup::SetRepOrigSpeed(float) --> void", pybind11::arg("newRepOrigSpeed"));
-		cl.def("PickupEnd", (void (BallFreezePickup::*)()) &BallFreezePickup::PickupEnd, "C++: BallFreezePickup::PickupEnd() --> void");
-		cl.def("HandleBallExploded", (void (BallFreezePickup::*)(class BallWrapper)) &BallFreezePickup::HandleBallExploded, "C++: BallFreezePickup::HandleBallExploded(class BallWrapper) --> void", pybind11::arg("InBall"));
-		cl.def("HandleBallHit", (void (BallFreezePickup::*)(class BallWrapper, class CarWrapper, unsigned char)) &BallFreezePickup::HandleBallHit, "C++: BallFreezePickup::HandleBallHit(class BallWrapper, class CarWrapper, unsigned char) --> void", pybind11::arg("InBall"), pybind11::arg("InCar"), pybind11::arg("HitType"));
-		cl.def("ApplyForces", (void (BallFreezePickup::*)(float)) &BallFreezePickup::ApplyForces, "C++: BallFreezePickup::ApplyForces(float) --> void", pybind11::arg("ActiveTime"));
-		cl.def("OnTargetChanged", (void (BallFreezePickup::*)()) &BallFreezePickup::OnTargetChanged, "C++: BallFreezePickup::OnTargetChanged() --> void");
-		cl.def("PickupStart", (void (BallFreezePickup::*)()) &BallFreezePickup::PickupStart, "C++: BallFreezePickup::PickupStart() --> void");
 	}
 }

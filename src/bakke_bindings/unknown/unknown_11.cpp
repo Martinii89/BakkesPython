@@ -68,7 +68,7 @@ void bind_unknown_unknown_11(py::module &M)
 		cl.def("SetCurrentFrame", (void (ReplayWrapper::*)(int)) &ReplayWrapper::SetCurrentFrame, "C++: ReplayWrapper::SetCurrentFrame(int) --> void", pybind11::arg("newCurrentFrame"));
 		cl.def("GetNextKeyframe", (int (ReplayWrapper::*)()) &ReplayWrapper::GetNextKeyframe, "C++: ReplayWrapper::GetNextKeyframe() --> int");
 		cl.def("SetNextKeyframe", (void (ReplayWrapper::*)(int)) &ReplayWrapper::SetNextKeyframe, "C++: ReplayWrapper::SetNextKeyframe(int) --> void", pybind11::arg("newNextKeyframe"));
-		//cl.def("GetCurrentTime", (float (ReplayWrapper::*)()) &ReplayWrapper::GetCurrentTime, "C++: ReplayWrapper::GetCurrentTime() --> float");
+//		cl.def("GetCurrentTime", (float (ReplayWrapper::*)()) &ReplayWrapper::GetCurrentTime, "C++: ReplayWrapper::GetCurrentTime() --> float");
 		cl.def("SetCurrentTime", (void (ReplayWrapper::*)(float)) &ReplayWrapper::SetCurrentTime, "C++: ReplayWrapper::SetCurrentTime(float) --> void", pybind11::arg("newCurrentTime"));
 		cl.def("GetAccumulatedDeltaTime", (float (ReplayWrapper::*)()) &ReplayWrapper::GetAccumulatedDeltaTime, "C++: ReplayWrapper::GetAccumulatedDeltaTime() --> float");
 		cl.def("SetAccumulatedDeltaTime", (void (ReplayWrapper::*)(float)) &ReplayWrapper::SetAccumulatedDeltaTime, "C++: ReplayWrapper::SetAccumulatedDeltaTime(float) --> void", pybind11::arg("newAccumulatedDeltaTime"));
@@ -81,9 +81,12 @@ void bind_unknown_unknown_11(py::module &M)
 		cl.def("GetPlaybackTime", (float (ReplayWrapper::*)()) &ReplayWrapper::GetPlaybackTime, "C++: ReplayWrapper::GetPlaybackTime() --> float");
 		cl.def("IsFromBeforeGameVersion", (bool (ReplayWrapper::*)(unsigned char)) &ReplayWrapper::IsFromBeforeGameVersion, "C++: ReplayWrapper::IsFromBeforeGameVersion(unsigned char) --> bool", pybind11::arg("BeforeGameVersion"));
 		cl.def("IsFromBeforeReplayVersion", (bool (ReplayWrapper::*)(unsigned char)) &ReplayWrapper::IsFromBeforeReplayVersion, "C++: ReplayWrapper::IsFromBeforeReplayVersion(unsigned char) --> bool", pybind11::arg("BeforeReplayVersion"));
+		cl.def("SetReplayName", (void (ReplayWrapper::*)(std::string)) &ReplayWrapper::SetReplayName, "C++: ReplayWrapper::SetReplayName(std::string) --> void", pybind11::arg("NewName"));
 		cl.def("RemoveTimelineKeyframe", (void (ReplayWrapper::*)(int)) &ReplayWrapper::RemoveTimelineKeyframe, "C++: ReplayWrapper::RemoveTimelineKeyframe(int) --> void", pybind11::arg("KeyframeIndex"));
 		cl.def("eventTrimData", (void (ReplayWrapper::*)(int, int)) &ReplayWrapper::eventTrimData, "C++: ReplayWrapper::eventTrimData(int, int) --> void", pybind11::arg("FirstKeyframe"), pybind11::arg("FirstFrame"));
 		cl.def("CreateCopy", (class ReplayWrapper (ReplayWrapper::*)(float)) &ReplayWrapper::CreateCopy, "C++: ReplayWrapper::CreateCopy(float) --> class ReplayWrapper", pybind11::arg("StartTime"));
+		cl.def("ImportReplay", (void (ReplayWrapper::*)(std::string)) &ReplayWrapper::ImportReplay, "C++: ReplayWrapper::ImportReplay(std::string) --> void", pybind11::arg("Path"));
+		cl.def("ExportReplay", (void (ReplayWrapper::*)(std::string)) &ReplayWrapper::ExportReplay, "C++: ReplayWrapper::ExportReplay(std::string) --> void", pybind11::arg("Path"));
 		cl.def("SkipToFrame", (void (ReplayWrapper::*)(int, unsigned long)) &ReplayWrapper::SkipToFrame, "C++: ReplayWrapper::SkipToFrame(int, unsigned long) --> void", pybind11::arg("frame"), pybind11::arg("bFlush"));
 		cl.def("SkipToTime", (void (ReplayWrapper::*)(float, unsigned long)) &ReplayWrapper::SkipToTime, "C++: ReplayWrapper::SkipToTime(float, unsigned long) --> void", pybind11::arg("Time"), pybind11::arg("bFlush"));
 		cl.def("GetReplayTimeSeconds", (float (ReplayWrapper::*)()) &ReplayWrapper::GetReplayTimeSeconds, "C++: ReplayWrapper::GetReplayTimeSeconds() --> float");

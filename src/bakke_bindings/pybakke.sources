@@ -1,4 +1,5 @@
 pybakke.cpp
+std/typeinfo.cpp
 unknown/unknown.cpp
 unknown/unknown_1.cpp
 unknown/unknown_2.cpp
@@ -9,7 +10,9 @@ unknown/unknown_6.cpp
 unknown/unknown_7.cpp
 unknown/unknown_8.cpp
 bakkesmod/wrappers/arraywrapper.cpp
+std/typeindex.cpp
 unknown/unknown_9.cpp
+bakkesmod/wrappers/Engine/UnrealStringWrapper.cpp
 unknown/unknown_10.cpp
 bakkesmod/wrappers/GameEvent/GameEditorWrapper.cpp
 bakkesmod/wrappers/GameEvent/ReplayDirectorWrapper.cpp
@@ -22,10 +25,10 @@ bakkesmod/wrappers/GameObject/CarComponent/DodgeComponentWrapper.cpp
 bakkesmod/wrappers/GameObject/CarComponent/PrimitiveComponentWrapper.cpp
 bakkesmod/wrappers/GameObject/CarComponent/VehicleSimWrapper.cpp
 bakkesmod/wrappers/GameObject/PerformanceStats/PerfStatGraphWrapper.cpp
-bakkesmod/wrappers/GameObject/PerformanceStats/StatGraphSystemWrapper.cpp
 unknown/unknown_13.cpp
-bakkesmod/wrappers/GameObject/RumbleComponent/BallLassoPickup.cpp
-bakkesmod/wrappers/GameObject/RumbleComponent/GravityPickup.cpp
-bakkesmod/wrappers/GameObject/RumbleComponent/VelcroPickup.cpp
+bakkesmod/wrappers/GameObject/RumbleComponent/BallCarSpringPickup.cpp
+bakkesmod/wrappers/GameObject/RumbleComponent/GrapplingHookPickup.cpp
+bakkesmod/wrappers/GameObject/RumbleComponent/HitForcePickup.cpp
 unknown/unknown_14.cpp
 unknown/unknown_15.cpp
+unknown/unknown_16.cpp

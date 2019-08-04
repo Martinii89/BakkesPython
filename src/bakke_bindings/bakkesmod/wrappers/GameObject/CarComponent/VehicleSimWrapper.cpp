@@ -74,6 +74,7 @@ void bind_bakkesmod_wrappers_GameObject_CarComponent_VehicleSimWrapper(py::modul
 		cl.def("SetLastTickTime", (void (StatGraphWrapper::*)(double)) &StatGraphWrapper::SetLastTickTime, "C++: StatGraphWrapper::SetLastTickTime(double) --> void", pybind11::arg("newLastTickTime"));
 		cl.def("GetSampleHistories", (class ArrayWrapper<class SampleHistoryWrapper> (StatGraphWrapper::*)()) &StatGraphWrapper::GetSampleHistories, "C++: StatGraphWrapper::GetSampleHistories() --> class ArrayWrapper<class SampleHistoryWrapper>");
 		cl.def("StopDrawing", (void (StatGraphWrapper::*)()) &StatGraphWrapper::StopDrawing, "C++: StatGraphWrapper::StopDrawing() --> void");
+		cl.def("CreateSampleHistory", (class SampleHistoryWrapper (StatGraphWrapper::*)(std::string)) &StatGraphWrapper::CreateSampleHistory, "C++: StatGraphWrapper::CreateSampleHistory(std::string) --> class SampleHistoryWrapper", pybind11::arg("Title"));
 		cl.def("AddSampleHistory", (class SampleHistoryWrapper (StatGraphWrapper::*)(class SampleHistoryWrapper)) &StatGraphWrapper::AddSampleHistory, "C++: StatGraphWrapper::AddSampleHistory(class SampleHistoryWrapper) --> class SampleHistoryWrapper", pybind11::arg("History"));
 		cl.def("eventConstruct", (void (StatGraphWrapper::*)()) &StatGraphWrapper::eventConstruct, "C++: StatGraphWrapper::eventConstruct() --> void");
 	}
@@ -97,6 +98,7 @@ void bind_bakkesmod_wrappers_GameObject_CarComponent_VehicleSimWrapper(py::modul
 		cl.def("SetMaxPhysicsRate", (void (InputBufferGraphWrapper::*)(float)) &InputBufferGraphWrapper::SetMaxPhysicsRate, "C++: InputBufferGraphWrapper::SetMaxPhysicsRate(float) --> void", pybind11::arg("newMaxPhysicsRate"));
 		cl.def("GetMinPhysicsRate", (float (InputBufferGraphWrapper::*)()) &InputBufferGraphWrapper::GetMinPhysicsRate, "C++: InputBufferGraphWrapper::GetMinPhysicsRate() --> float");
 		cl.def("SetMinPhysicsRate", (void (InputBufferGraphWrapper::*)(float)) &InputBufferGraphWrapper::SetMinPhysicsRate, "C++: InputBufferGraphWrapper::SetMinPhysicsRate(float) --> void", pybind11::arg("newMinPhysicsRate"));
+		cl.def("CreateBufferHistory", (class SampleHistoryWrapper (InputBufferGraphWrapper::*)(std::string)) &InputBufferGraphWrapper::CreateBufferHistory, "C++: InputBufferGraphWrapper::CreateBufferHistory(std::string) --> class SampleHistoryWrapper", pybind11::arg("Title"));
 		cl.def("eventConstruct", (void (InputBufferGraphWrapper::*)()) &InputBufferGraphWrapper::eventConstruct, "C++: InputBufferGraphWrapper::eventConstruct() --> void");
 	}
 	{ // NetStatGraphWrapper file:bakkesmod/wrappers/GameObject/PerformanceStats/NetStatGraphWrapper.h line:8
@@ -128,6 +130,9 @@ void bind_bakkesmod_wrappers_GameObject_CarComponent_VehicleSimWrapper(py::modul
 		cl.def("GetMaxBytesRate", (float (NetStatGraphWrapper::*)()) &NetStatGraphWrapper::GetMaxBytesRate, "C++: NetStatGraphWrapper::GetMaxBytesRate() --> float");
 		cl.def("SetMaxBytesRate", (void (NetStatGraphWrapper::*)(float)) &NetStatGraphWrapper::SetMaxBytesRate, "C++: NetStatGraphWrapper::SetMaxBytesRate(float) --> void", pybind11::arg("newMaxBytesRate"));
 		cl.def("eventUpdateGraphRanges", (void (NetStatGraphWrapper::*)()) &NetStatGraphWrapper::eventUpdateGraphRanges, "C++: NetStatGraphWrapper::eventUpdateGraphRanges() --> void");
+		cl.def("CreateBytesSummary", (class SampleHistoryWrapper (NetStatGraphWrapper::*)(std::string)) &NetStatGraphWrapper::CreateBytesSummary, "C++: NetStatGraphWrapper::CreateBytesSummary(std::string) --> class SampleHistoryWrapper", pybind11::arg("Title"));
+		cl.def("CreateLossSummary", (class SampleHistoryWrapper (NetStatGraphWrapper::*)(std::string)) &NetStatGraphWrapper::CreateLossSummary, "C++: NetStatGraphWrapper::CreateLossSummary(std::string) --> class SampleHistoryWrapper", pybind11::arg("Title"));
+		cl.def("CreatePktSummary", (class SampleHistoryWrapper (NetStatGraphWrapper::*)(std::string)) &NetStatGraphWrapper::CreatePktSummary, "C++: NetStatGraphWrapper::CreatePktSummary(std::string) --> class SampleHistoryWrapper", pybind11::arg("Title"));
 		cl.def("eventConstruct", (void (NetStatGraphWrapper::*)()) &NetStatGraphWrapper::eventConstruct, "C++: NetStatGraphWrapper::eventConstruct() --> void");
 	}
 }
