@@ -1,6 +1,6 @@
-from pybakkes import *
+from pybakke import GameWrapper, Vector
 cVarManager = None
-gameWrapper : GameWrapper = None
+gameWrapper = None
 import os
 
 def add(i, j):
@@ -11,7 +11,7 @@ def log(message, CVarManager):
     CVarManager.log("Hello from Python!:" + message)
 
 
-def onLoad(GameWrapper: GameWrapper, CVarManager):
+def onLoad(GameWrapper: GameWrapper, CVarManager: CVarManager):
     global cVarManager
     global gameWrapper
     cVarManager = CVarManager
@@ -41,10 +41,10 @@ def onTick(eventName):
     if car.IsNull() or ball.IsNull():
         return
 
-    playerVelocity = car.GetVelocity()
-    # cVarManager.log(f"CarPosition({playerVelocity.x},{playerVelocity.y}")
+    playerVelocity: Vector = car.GetVelocity()
+    #cVarManager.log(f"CarPosition({playerVelocity.x},{playerVelocity.y}")
     playerPosition = car.GetLocation()
-    playerPosition.z += 170
+    playerPosition.Z += 170
 
     ball.SetVelocity(playerVelocity)
     ball.SetLocation(playerPosition)
