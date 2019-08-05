@@ -1,50 +1,34 @@
-from pybakke import GameWrapper, Vector
-cVarManager = None
-gameWrapper = None
-import os
-
-def add(i, j):
-    return i + j
+from pybakke import GameWrapper, Vector, BallWrapper, CarWrapper, CVarManagerWrapper
 
 
-def log(message, CVarManager):
-    CVarManager.log("Hello from Python!:" + message)
+class DefenderPlugin:
+
+    def __init__(self, game_wrapper: GameWrapper, cvar_manager: CVarManagerWrapper):
+        self.game_wrapper = game_wrapper
+        self.cvar_manager = cvar_manager
+        self.cvar_manager.log("Defender plugin __init__")
+        game_wrapper.HookEvent(
+            "Function TAGame.Car_TA.SetVehicleInput", self.on_tick)
+
+    def on_tick(self, event_name):
+        gameevent = self.game_wrapper.GetGameEventAsServer()
+        car = gameevent.GetGameCar()
+        ball = gameevent.GetBall()
+        if car.IsNull() or ball.IsNull():
+            return
+
+        player_velocity: Vector = car.GetVelocity()
+        # cVarManager.log(f"CarPosition({playerVelocity.x},{playerVelocity.y}")
+        player_position: Vector = car.GetLocation()
+        player_position.Z += 170
+
+        ball.SetVelocity(player_velocity)
+        ball.SetLocation(player_position)
 
 
-def onLoad(GameWrapper: GameWrapper, CVarManager: CVarManager):
-    global cVarManager
-    global gameWrapper
-    cVarManager = CVarManager
-    gameWrapper = GameWrapper
-    CVarManager.log("Hello from onLoad in Python! EDIT!")
-    GameWrapper.HookEventPost("Function TAGame.Car_TA.EventHitBall", onHitBall)
-    GameWrapper.HookEvent("Function TAGame.Car_TA.SetVehicleInput", onTick)
+PLUGIN = None
 
 
-def onTick(eventName):
-    cVarManager.log("Hello from onTick!")
-
-
-def onHitBall(eventName):
-    cVarManager.log("hit ball")
-
-    #ballV = ball.GetVelocity()
-    #cVarManager.log(eventName + ": " + str(gameevent.GetSecondsElapsed()))
-    # cVarManager.log(f"CarPosition({carP.x},{carP.y}")
-    # cVarManager.log(str(gameevent.Add(3,4)))
-
-
-def onTick(eventName):
-    gameevent = gameWrapper.GetGameEventAsServer()
-    car = gameevent.GetGameCar()
-    ball = gameevent.GetBall()
-    if car.IsNull() or ball.IsNull():
-        return
-
-    playerVelocity: Vector = car.GetVelocity()
-    #cVarManager.log(f"CarPosition({playerVelocity.x},{playerVelocity.y}")
-    playerPosition = car.GetLocation()
-    playerPosition.Z += 170
-
-    ball.SetVelocity(playerVelocity)
-    ball.SetLocation(playerPosition)
+def onLoad(game_wrapper: GameWrapper, cvar_manager: CVarManagerWrapper):
+    global PLUGIN
+    PLUGIN = DefenderPlugin(game_wrapper, cvar_manager)

@@ -59,22 +59,22 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="customPaths.props" />
+    <Import Project="BakkesMod.props" />
     <Import Project="python.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="customPaths.props" />
+    <Import Project="BakkesMod.props" />
     <Import Project="python.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="customPaths.props" />
+    <Import Project="BakkesMod.props" />
     <Import Project="python.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="customPaths.props" />
+    <Import Project="BakkesMod.props" />
     <Import Project="python.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -143,7 +143,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>src;pybind11\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -153,9 +153,7 @@
       <EnableUAC>false</EnableUAC>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>python "$(BAKKESMOD)\bakkesmodsdk\bakkes_patchplugin.py" "$(TargetPath)"</Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -179,43 +177,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\bakke_bindings\pybakke.h" />
+    <ClInclude Include="bakke_bindings\pybakke.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\PythonPlugin.h" />
     <ClInclude Include="src\pyWrappers\pyWrappers.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\arraywrapper.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\Engine\UnrealStringWrapper.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameEvent\GameEditorWrapper.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameEvent\ReplayDirectorWrapper.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameEvent\TutorialWrapper.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\BaseCameraWrapper.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\CameraWrapper.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\CarComponent\DodgeComponentWrapper.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\CarComponent\PrimitiveComponentWrapper.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\CarComponent\VehicleSimWrapper.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\PerformanceStats\PerfStatGraphWrapper.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\RumbleComponent\BallCarSpringPickup.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\RumbleComponent\GrapplingHookPickup.cpp" />
-    <ClCompile Include="src\bakke_bindings\bakkesmod\wrappers\GameObject\RumbleComponent\HitForcePickup.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_1.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_10.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_11.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_12.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_13.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_14.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_15.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_16.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_2.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_3.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_4.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_5.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_6.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_7.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_8.cpp" />
-    <ClCompile Include="src\bakke_bindings\unknown\unknown_9.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\arraywrapper.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\Engine\UnrealStringWrapper.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\GameEvent\GameEditorWrapper.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\GameEvent\ReplayDirectorWrapper.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\GameEvent\TutorialWrapper.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\GameObject\BaseCameraWrapper.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\GameObject\CameraWrapper.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\GameObject\CarComponent\DodgeComponentWrapper.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\GameObject\CarComponent\PrimitiveComponentWrapper.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\GameObject\CarComponent\VehicleSimWrapper.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\GameObject\PerformanceStats\PerfStatGraphWrapper.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\GameObject\RumbleComponent\BallCarSpringPickup.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\GameObject\RumbleComponent\GravityPickup.cpp" />
+    <ClCompile Include="bakke_bindings\bakkesmod\wrappers\GameObject\RumbleComponent\VelcroPickup.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_1.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_10.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_11.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_12.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_13.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_14.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_15.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_16.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_2.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_3.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_4.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_5.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_6.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_7.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_8.cpp" />
+    <ClCompile Include="bakke_bindings\unknown\unknown_9.cpp" />
     <ClCompile Include="src\PythonPlugin.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "PythonPlugin.h"
 //#include "pyWrappers/pyWrappers.h"
-#include "bakke_bindings/pybakke.h"
+#include "bindings/pybakke.h"
 using namespace std::placeholders;
 
 
