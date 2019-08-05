@@ -15,5 +15,5 @@ private:
 	//Default constructed - initializes interpeter, uninit on deconstruct.
 	void ReloadModule(vector<string> params);
 	py::scoped_interpreter interpreter;
-	py::module pluginModule;
+	vector<py::module> pyModules;
 };
