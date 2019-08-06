@@ -21,20 +21,20 @@ modules_to_load =  [x.name for x in iter_modules(path=['bakkesmod/py2'])]
 )", py::globals(), locals);
 
 	auto modulesToLoad = locals["modules_to_load"].cast<vector<string>>();
-	string moduleBasePath = "bakkesmod.py2.";
 	for (auto const & _import : modulesToLoad)
 	{
 		cvarManager->log("Loading " + _import);
-		auto mod = py::module::import((moduleBasePath + _import).c_str());
-		if (py::hasattr(mod, "onLoad"))
+		auto modPtr = std::make_shared<PyModule>(_import);
+		if (py::hasattr(modPtr->mod, "onLoad"))
 		{
-			mod.attr("onLoad")(gameWrapper, cvarManager);
+			modPtr->mod.attr("onLoad")(gameWrapper, cvarManager);
 		}
 		else {
 			cvarManager->log(_import + " does not have a onLoad function!");
-		}
-		pyModules.push_back(mod);
+		}		
+		pyModules.push_back(modPtr);
 	}
+
 
 }
 
@@ -45,5 +45,24 @@ void PythonPlugin::onUnload()
 
 void PythonPlugin::ReloadModule(vector<string> params)
 {
-	cvarManager->log("TODO: parse params and reload that specific script");
+	for (auto const& param : params)
+	{
+		if (param == "python_reload") continue;
+		for (auto& modPtr : pyModules)
+		{
+			if (modPtr->name == param)
+			{
+				cvarManager->log("Reloading: " + modPtr->name);
+				if (py::hasattr(modPtr->mod, "onUnload"))
+				{
+					modPtr->mod.attr("onUnload")();
+				}
+				modPtr->mod.reload();
+				if (py::hasattr(modPtr->mod, "onLoad"))
+				{
+					modPtr->mod.attr("onLoad")(gameWrapper, cvarManager);
+				}
+			}
+		}
+	}
 }
