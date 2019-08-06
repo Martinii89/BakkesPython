@@ -12,10 +12,8 @@ To compile you will need to:
 * You will need python 3.7 32 bit installed. This can be installed in visual studio by accessing the visual studio installer.
 
 ## Usage
-See src\Python for an example script. You have to place this in the same folder as RocketLeague.exe for the plugin to find it.
+See src\Python for an example script. You have to place scripts in bakkesmod\py2 for the plugin to load them.
 
-To make the plugin find the script. It's name needs to match the string given in the onLoad function of **PythonPlugin.cpp**: `pluginModule = py::module::import("testPlugin");` 
+There is a .pyi file that contains typehints for pretty much everything. You may need to configure some to make the intellisense work.
 
-TODO: Make it look for the python file in a subfolder in the bakkesmod folder.
-
-TODO: Make it search for any .py file in that folder.
+The plugin should have a onLoad and a onUnload function.
