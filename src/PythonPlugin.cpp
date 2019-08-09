@@ -34,8 +34,6 @@ modules_to_load =  [x.name for x in iter_modules(path=['bakkesmod/py2'])]
 		}		
 		pyModules.push_back(modPtr);
 	}
-
-
 }
 
 void PythonPlugin::onUnload()
@@ -45,24 +43,32 @@ void PythonPlugin::onUnload()
 
 void PythonPlugin::ReloadModule(vector<string> params)
 {
-	for (auto const& param : params)
+	try
 	{
-		if (param == "python_reload") continue;
-		for (auto& modPtr : pyModules)
+		for (auto const& param : params)
 		{
-			if (modPtr->name == param)
+			if (param == "python_reload") continue;
+			for (auto& modPtr : pyModules)
 			{
-				cvarManager->log("Reloading: " + modPtr->name);
-				if (py::hasattr(modPtr->mod, "onUnload"))
+				if (modPtr->name == param)
 				{
-					modPtr->mod.attr("onUnload")();
-				}
-				modPtr->mod.reload();
-				if (py::hasattr(modPtr->mod, "onLoad"))
-				{
-					modPtr->mod.attr("onLoad")(gameWrapper, cvarManager);
+					cvarManager->log("Reloading: " + modPtr->name);
+					if (py::hasattr(modPtr->mod, "onUnload"))
+					{
+						modPtr->mod.attr("onUnload")();
+					}
+					modPtr->mod.reload();
+					if (py::hasattr(modPtr->mod, "onLoad"))
+					{
+						modPtr->mod.attr("onLoad")(gameWrapper, cvarManager);
+					}
 				}
 			}
 		}
 	}
+	catch (const std::exception& e)
+	{
+		cvarManager->log(e.what());
+	}
+
 }
