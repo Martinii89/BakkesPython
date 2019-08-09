@@ -16,3 +16,7 @@ See src\Python for an example script. You have to place scripts in bakkesmod\py2
 There is a .pyi file that contains typehints for pretty much everything. You may need to configure some to make the intellisense work.
 
 The plugin should have a onLoad and a onUnload function.
+For general use. I would recomend downloading the embedabble python 3.7.3
+https://www.python.org/ftp/python/3.7.3/python-3.7.3-embed-win32.zip
+The path to where you unzip this, needs to be added to the system PATH variable.
+
