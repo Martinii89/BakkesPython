@@ -3,7 +3,7 @@
 #include "pybind11/embed.h"
 namespace py = pybind11;
 
-string moduleBasePath = "bakkesmod.py2.";
+string moduleBasePath = "bakkesmod.data.python.";
 
 struct PyModule
 {

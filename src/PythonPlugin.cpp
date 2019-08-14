@@ -17,7 +17,7 @@ void PythonPlugin::onLoad()
 	auto locals = py::dict();
 	py::exec(R"(
 from pkgutil import iter_modules
-modules_to_load =  [x.name for x in iter_modules(path=['bakkesmod/py2'])]
+modules_to_load =  [x.name for x in iter_modules(path=['bakkesmod/data/python'])]
 )", py::globals(), locals);
 
 	auto modulesToLoad = locals["modules_to_load"].cast<vector<string>>();
