@@ -11,7 +11,7 @@ To compile you will need to:
 * You may need to setup a symbolc link PythonPlugin\src\bindings to ..\bakke_bindings
 
 ## Usage
-See src\Python for an example script. You have to place scripts in bakkesmod\py2 for the plugin to load them.
+See src\Python for an example script. You have to place scripts in bakkesmod\data\python for the plugin to load them.
 
 There is a .pyi file that contains typehints for pretty much everything. You may need to configure some to make the intellisense work.
 
